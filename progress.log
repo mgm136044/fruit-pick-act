@@ -154,3 +154,19 @@
 [2026-11-26 11:07] mix3 A orange: SUMMARY {"Orange": {"attempts": 158, "saved": 138, "stats": {"성공": 138, "놓침": 12}, "relayouts": 362}} 총 5417s
 [2026-11-26 12:36] mix3 A lemon: SUMMARY {"Lemon": {"attempts": 147, "saved": 138, "stats": {"성공": 138, "놓침": 2}, "relayouts": 336}} 총 5327s
 [2026-11-26 13:26] 실행 전 정독 수정: eval_sweep·dagger_collect 의 닫힘 판정 시작값 False→True (휴식 자세 그리퍼 모터 0 = 닫힘이라 t=0 을 쥐기로 세던 문제: T1·이른 넘겨받기 꺼짐, 시작 상승에서 T2 오발, 스윕 '닫기 전 밀어냄'·'멈춤' 분류 꺼짐·성공마다 다시 잡기로 셈). eval_sweep 빗나감 거리를 과일별 잡는 점·TCP 기준으로(바나나 원점-잡는 점 3.6cm). 사본 logs/*_pre_restclose_snapshot.py. 휴식 손끝 z 1.00m > T1_miss 기준 0.97m 확인
+[2026-11-26 13:30] 친구 2 세션용 C(mix3 A chunk 100 10만) 2단계 프롬프트 작성: 1단계 환경 준비 + HF 3분마다 확인(19시 한도), 2단계 크기·sha256 대조 후 즉시 학습. 계정 이름이 들어 있어 .gitignore 로 공개 저장소 제외. 맥미니 전송·HF 업로드는 사용자
+[2026-11-26 13:51] mix3 A banana: SUMMARY {"Banana": {"attempts": 126, "saved": 110, "stats": {"성공": 110, "놓침": 8, "접시 밖": 2, "미끄러짐": 1}, "relayouts": 217}} 총 4474s
+[2026-11-26 13:51] finish_A verify strawberry:   "total_frames": 48512,   "frames": 278,    "frames": 48512, 
+[2026-11-26 13:51] finish_A verify orange:   "total_frames": 41124,   "frames": 301,    "frames": 41124, 
+[2026-11-26 13:52] finish_A verify lemon:   "total_frames": 40996,   "frames": 261,    "frames": 40996, 
+[2026-11-26 13:52] 과제5 창 1 끝 → run_after_A3.sh(P0 스윕) 재개
+[2026-11-26 13:52] P0 스윕 시작: mix2 10만 te0.01, 9조건 × 8
+[2026-11-26 13:52] finish_A verify banana:   "total_frames": 32227,   "frames": 299,    "frames": 32227, 
+[2026-11-26 13:52] finish_A merge: MERGED /home/mingyeongmin/datasets/fruit_mix3_A 551 episodes 162859 frames
+[2026-11-26 13:52] finish_A 완료: /home/mingyeongmin/datasets/fruit_mix3_A_train (zip 3482271607 bytes, sha256 61187afb44223c4f…, 551 162859)
+[2026-11-26 13:55] 과제5 창 1 실패 원인: ~/hw5_sim 에 so101_chain.json·logs/fruit_pts_*.npy 없음 → 과일 폴더에서 복사(cp -n). 다시 돌릴 시점은 사용자 결정 대기
+[2026-11-26 14:09] P0 스윕:  2026-11-26T04:52:13Z [6,305ms] [Error] [omni.physx.plugin] PhysX Shape failed to be created on a prim: /World/envs/env_0/Scene/Scene/light_switch_2_room/_body_0/object/visuals!
+[2026-11-26 14:09] 사용자 결정(14:0x): 스윕 자리에 과제5. 스윕 16회(xy6 3/8·xy10 5/8)에서 멈춤(로그 *_partial_xy6xy10.log), run_dagger_r1a.sh 일시정지(STOP), 과제5 window1.sh 다시 시작 → 끝나면 resume_dagger_after_hw5.sh 가 DAgger 재개. 남은 스윕 7조건은 R1a 뒤
+[2026-11-26 14:10] 과제5 창 끝 ([2026-11-26 14:10:00] 시험 성공 회 (< 2) → 본 생성 하지 않음) → run_dagger_r1a.sh(1251559) 다시 돌림
+[2026-11-26 14:10] DAgger 시험 16회 시작 (운전 te_models/act_mix2_100k_color_te)
+[2026-11-26 14:11] 과제5 2차 실패(orange_recover 없음) → 복사·import 시험 OK. 순서 변경: DAgger 시험(진행 중) → 과제5 → R1a. run_dagger_r1a.sh 다시 STOP, hw5_after_dagger_test.sh 가 처리
