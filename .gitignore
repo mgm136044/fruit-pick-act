@@ -1,0 +1,21 @@
+# 기본은 모두 제외하고 코드·문서·작은 결과 기록만 포함 (데이터셋·모델 zip·GIF·학습 결과·수업 자료 제외)
+/*
+!/.gitignore
+!/*.md
+!/*.py
+!/*.sh
+!/*.json
+!/progress.log
+!/params_abl/
+!/prompts/
+!/reports_w1/
+!/school_training/
+!/assets_c4/
+!/logs/
+/logs/*
+!/logs/fruit_pts_*.npy
+!/logs/*.json
+!/logs/*.jsonl
+!/logs/*.md
+__pycache__/
+*.pyc

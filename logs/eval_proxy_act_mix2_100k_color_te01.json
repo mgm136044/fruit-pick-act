@@ -1,0 +1,1181 @@
+{
+ "checkpoint": "te_models/act_mix2_100k_color_te",
+ "n_action_steps": 1,
+ "temporal_ensemble": 0.01,
+ "grip_remap": null,
+ "scenes": {
+  "default": {
+   "success": 0.875,
+   "per_fruit": {
+    "딸기": 0.5,
+    "오렌지": 1.0,
+    "레몬": 1.0,
+    "바나나": 1.0
+   }
+  },
+  "count": {
+   "success": 0.375,
+   "per_fruit": {
+    "딸기": 0.5,
+    "오렌지": 0.5,
+    "레몬": 0.0,
+    "바나나": 0.5
+   }
+  },
+  "robot": {
+   "success": 0.5,
+   "per_fruit": {
+    "딸기": 0.5,
+    "오렌지": 0.0,
+    "레몬": 0.5,
+    "바나나": 1.0
+   }
+  },
+  "light": {
+   "success": 0.875,
+   "per_fruit": {
+    "딸기": 1.0,
+    "오렌지": 1.0,
+    "레몬": 1.0,
+    "바나나": 0.5
+   }
+  },
+  "mixed": {
+   "success": 0.375,
+   "per_fruit": {
+    "딸기": 0.5,
+    "오렌지": 0.0,
+    "레몬": 0.5,
+    "바나나": 0.5
+   }
+  },
+  "distract": {
+   "success": 0.125,
+   "per_fruit": {
+    "딸기": 0.5,
+    "오렌지": 0.0,
+    "레몬": 0.0,
+    "바나나": 0.0
+   }
+  }
+ },
+ "score_mean_of_scenes_x100": 60.0,
+ "score_note": "distract 제외 (서버에 없음)",
+ "why": {
+  "못 들어올림(잡기 실패)": 23,
+  "성공": 25
+ },
+ "episodes": [
+  {
+   "scene": "default",
+   "kinds": [
+    "default"
+   ],
+   "fruit": "Strawberry",
+   "success": false,
+   "steps": 900,
+   "count": 1,
+   "extra": {},
+   "robot": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "light": null,
+   "max_lift_cm": 0.0,
+   "plate_dist_cm": 28.0,
+   "why": "못 들어올림(잡기 실패)",
+   "gif": "report_html/assets/policy_act_mix2_100k_color_te01/default_00_strawberry_fail.gif"
+  },
+  {
+   "scene": "default",
+   "kinds": [
+    "default"
+   ],
+   "fruit": "Orange",
+   "success": true,
+   "steps": 179,
+   "count": 1,
+   "extra": {},
+   "robot": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "light": null,
+   "max_lift_cm": 11.3,
+   "plate_dist_cm": 5.6,
+   "why": "성공",
+   "gif": "report_html/assets/policy_act_mix2_100k_color_te01/default_01_orange_ok.gif"
+  },
+  {
+   "scene": "default",
+   "kinds": [
+    "default"
+   ],
+   "fruit": "Lemon",
+   "success": true,
+   "steps": 181,
+   "count": 1,
+   "extra": {},
+   "robot": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "light": null,
+   "max_lift_cm": 11.3,
+   "plate_dist_cm": 3.9,
+   "why": "성공"
+  },
+  {
+   "scene": "default",
+   "kinds": [
+    "default"
+   ],
+   "fruit": "Banana",
+   "success": true,
+   "steps": 216,
+   "count": 1,
+   "extra": {},
+   "robot": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "light": null,
+   "max_lift_cm": 11.8,
+   "plate_dist_cm": 3.9,
+   "why": "성공"
+  },
+  {
+   "scene": "default",
+   "kinds": [
+    "default"
+   ],
+   "fruit": "Strawberry",
+   "success": true,
+   "steps": 175,
+   "count": 1,
+   "extra": {},
+   "robot": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "light": null,
+   "max_lift_cm": 8.7,
+   "plate_dist_cm": 11.6,
+   "why": "성공"
+  },
+  {
+   "scene": "default",
+   "kinds": [
+    "default"
+   ],
+   "fruit": "Orange",
+   "success": true,
+   "steps": 186,
+   "count": 1,
+   "extra": {},
+   "robot": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "light": null,
+   "max_lift_cm": 12.1,
+   "plate_dist_cm": 3.8,
+   "why": "성공"
+  },
+  {
+   "scene": "default",
+   "kinds": [
+    "default"
+   ],
+   "fruit": "Lemon",
+   "success": true,
+   "steps": 192,
+   "count": 1,
+   "extra": {},
+   "robot": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "light": null,
+   "max_lift_cm": 10.9,
+   "plate_dist_cm": 2.5,
+   "why": "성공"
+  },
+  {
+   "scene": "default",
+   "kinds": [
+    "default"
+   ],
+   "fruit": "Banana",
+   "success": true,
+   "steps": 225,
+   "count": 1,
+   "extra": {},
+   "robot": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "light": null,
+   "max_lift_cm": 11.6,
+   "plate_dist_cm": 4.3,
+   "why": "성공"
+  },
+  {
+   "scene": "count",
+   "kinds": [
+    "count"
+   ],
+   "fruit": "Strawberry",
+   "success": false,
+   "steps": 900,
+   "count": 2,
+   "extra": {},
+   "robot": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "light": null,
+   "max_lift_cm": 0.1,
+   "plate_dist_cm": 32.1,
+   "why": "못 들어올림(잡기 실패)",
+   "gif": "report_html/assets/policy_act_mix2_100k_color_te01/count_00_strawberry_fail.gif"
+  },
+  {
+   "scene": "count",
+   "kinds": [
+    "count"
+   ],
+   "fruit": "Orange",
+   "success": true,
+   "steps": 205,
+   "count": 3,
+   "extra": {},
+   "robot": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "light": null,
+   "max_lift_cm": 12.5,
+   "plate_dist_cm": 0.8,
+   "why": "성공",
+   "gif": "report_html/assets/policy_act_mix2_100k_color_te01/count_01_orange_ok.gif"
+  },
+  {
+   "scene": "count",
+   "kinds": [
+    "count"
+   ],
+   "fruit": "Lemon",
+   "success": false,
+   "steps": 900,
+   "count": 2,
+   "extra": {},
+   "robot": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "light": null,
+   "max_lift_cm": 0.7,
+   "plate_dist_cm": 16.1,
+   "why": "못 들어올림(잡기 실패)"
+  },
+  {
+   "scene": "count",
+   "kinds": [
+    "count"
+   ],
+   "fruit": "Banana",
+   "success": true,
+   "steps": 187,
+   "count": 2,
+   "extra": {},
+   "robot": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "light": null,
+   "max_lift_cm": 11.7,
+   "plate_dist_cm": 3.4,
+   "why": "성공"
+  },
+  {
+   "scene": "count",
+   "kinds": [
+    "count"
+   ],
+   "fruit": "Strawberry",
+   "success": true,
+   "steps": 191,
+   "count": 2,
+   "extra": {},
+   "robot": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "light": null,
+   "max_lift_cm": 11.4,
+   "plate_dist_cm": 1.5,
+   "why": "성공"
+  },
+  {
+   "scene": "count",
+   "kinds": [
+    "count"
+   ],
+   "fruit": "Orange",
+   "success": false,
+   "steps": 900,
+   "count": 2,
+   "extra": {},
+   "robot": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "light": null,
+   "max_lift_cm": 0.7,
+   "plate_dist_cm": 26.4,
+   "why": "못 들어올림(잡기 실패)"
+  },
+  {
+   "scene": "count",
+   "kinds": [
+    "count"
+   ],
+   "fruit": "Lemon",
+   "success": false,
+   "steps": 900,
+   "count": 3,
+   "extra": {},
+   "robot": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "light": null,
+   "max_lift_cm": 0.1,
+   "plate_dist_cm": 26.4,
+   "why": "못 들어올림(잡기 실패)"
+  },
+  {
+   "scene": "count",
+   "kinds": [
+    "count"
+   ],
+   "fruit": "Banana",
+   "success": false,
+   "steps": 900,
+   "count": 2,
+   "extra": {},
+   "robot": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "light": null,
+   "max_lift_cm": 0.0,
+   "plate_dist_cm": 22.3,
+   "why": "못 들어올림(잡기 실패)"
+  },
+  {
+   "scene": "robot",
+   "kinds": [
+    "robot"
+   ],
+   "fruit": "Strawberry",
+   "success": false,
+   "steps": 900,
+   "count": 1,
+   "extra": {},
+   "robot": [
+    -9.882199333650606,
+    5.129579402919145,
+    -25.345441788085417
+   ],
+   "light": null,
+   "max_lift_cm": 0.5,
+   "plate_dist_cm": 30.1,
+   "why": "못 들어올림(잡기 실패)",
+   "gif": "report_html/assets/policy_act_mix2_100k_color_te01/robot_00_strawberry_fail.gif"
+  },
+  {
+   "scene": "robot",
+   "kinds": [
+    "robot"
+   ],
+   "fruit": "Orange",
+   "success": false,
+   "steps": 900,
+   "count": 1,
+   "extra": {},
+   "robot": [
+    6.8164432435272175,
+    9.009517245001682,
+    -10.867525275937016
+   ],
+   "light": null,
+   "max_lift_cm": 1.0,
+   "plate_dist_cm": 24.1,
+   "why": "못 들어올림(잡기 실패)",
+   "gif": "report_html/assets/policy_act_mix2_100k_color_te01/robot_01_orange_fail.gif"
+  },
+  {
+   "scene": "robot",
+   "kinds": [
+    "robot"
+   ],
+   "fruit": "Lemon",
+   "success": true,
+   "steps": 204,
+   "count": 1,
+   "extra": {},
+   "robot": [
+    6.242242210271527,
+    5.97687196118228,
+    9.317110620664742
+   ],
+   "light": null,
+   "max_lift_cm": 11.3,
+   "plate_dist_cm": 2.1,
+   "why": "성공"
+  },
+  {
+   "scene": "robot",
+   "kinds": [
+    "robot"
+   ],
+   "fruit": "Banana",
+   "success": true,
+   "steps": 220,
+   "count": 1,
+   "extra": {},
+   "robot": [
+    -1.5125772214597752,
+    -6.969224939613863,
+    22.3963769272831
+   ],
+   "light": null,
+   "max_lift_cm": 12.1,
+   "plate_dist_cm": 3.1,
+   "why": "성공"
+  },
+  {
+   "scene": "robot",
+   "kinds": [
+    "robot"
+   ],
+   "fruit": "Strawberry",
+   "success": true,
+   "steps": 174,
+   "count": 1,
+   "extra": {},
+   "robot": [
+    1.1849935426733094,
+    -1.4238749329596097,
+    21.51584529356125
+   ],
+   "light": null,
+   "max_lift_cm": 8.9,
+   "plate_dist_cm": 11.9,
+   "why": "성공"
+  },
+  {
+   "scene": "robot",
+   "kinds": [
+    "robot"
+   ],
+   "fruit": "Orange",
+   "success": false,
+   "steps": 900,
+   "count": 1,
+   "extra": {},
+   "robot": [
+    2.810198736651607,
+    8.621586992235201,
+    -14.291938674574014
+   ],
+   "light": null,
+   "max_lift_cm": 0.0,
+   "plate_dist_cm": 25.5,
+   "why": "못 들어올림(잡기 실패)"
+  },
+  {
+   "scene": "robot",
+   "kinds": [
+    "robot"
+   ],
+   "fruit": "Lemon",
+   "success": false,
+   "steps": 900,
+   "count": 1,
+   "extra": {},
+   "robot": [
+    4.803099468421525,
+    -4.136374339578808,
+    -15.37529372577556
+   ],
+   "light": null,
+   "max_lift_cm": 0.2,
+   "plate_dist_cm": 23.0,
+   "why": "못 들어올림(잡기 실패)"
+  },
+  {
+   "scene": "robot",
+   "kinds": [
+    "robot"
+   ],
+   "fruit": "Banana",
+   "success": true,
+   "steps": 217,
+   "count": 1,
+   "extra": {},
+   "robot": [
+    -3.428898250377051,
+    2.2528334363630194,
+    2.6829240114981587
+   ],
+   "light": null,
+   "max_lift_cm": 12.0,
+   "plate_dist_cm": 4.1,
+   "why": "성공"
+  },
+  {
+   "scene": "light",
+   "kinds": [
+    "light"
+   ],
+   "fruit": "Strawberry",
+   "success": true,
+   "steps": 192,
+   "count": 1,
+   "extra": {},
+   "robot": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "light": [
+    1.4605537283750305,
+    [
+     1.0130448275800317,
+     1.0538272445228551,
+     1.0564777745478056
+    ]
+   ],
+   "max_lift_cm": 11.1,
+   "plate_dist_cm": 1.1,
+   "why": "성공",
+   "gif": "report_html/assets/policy_act_mix2_100k_color_te01/light_00_strawberry_ok.gif"
+  },
+  {
+   "scene": "light",
+   "kinds": [
+    "light"
+   ],
+   "fruit": "Orange",
+   "success": true,
+   "steps": 190,
+   "count": 1,
+   "extra": {},
+   "robot": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "light": [
+    0.9620438220497799,
+    [
+     1.0065800600243129,
+     0.9316134259483565,
+     0.9040362840832169
+    ]
+   ],
+   "max_lift_cm": 10.8,
+   "plate_dist_cm": 5.9,
+   "why": "성공",
+   "gif": "report_html/assets/policy_act_mix2_100k_color_te01/light_01_orange_ok.gif"
+  },
+  {
+   "scene": "light",
+   "kinds": [
+    "light"
+   ],
+   "fruit": "Lemon",
+   "success": true,
+   "steps": 181,
+   "count": 1,
+   "extra": {},
+   "robot": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "light": [
+    0.7287544534222673,
+    [
+     0.9155254692591202,
+     1.1364697176889045,
+     1.0674678802492716
+    ]
+   ],
+   "max_lift_cm": 10.8,
+   "plate_dist_cm": 5.1,
+   "why": "성공"
+  },
+  {
+   "scene": "light",
+   "kinds": [
+    "light"
+   ],
+   "fruit": "Banana",
+   "success": true,
+   "steps": 208,
+   "count": 1,
+   "extra": {},
+   "robot": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "light": [
+    0.5084961662918887,
+    [
+     0.9294885644953872,
+     1.1251972454603807,
+     0.8741163149169409
+    ]
+   ],
+   "max_lift_cm": 12.0,
+   "plate_dist_cm": 3.8,
+   "why": "성공"
+  },
+  {
+   "scene": "light",
+   "kinds": [
+    "light"
+   ],
+   "fruit": "Strawberry",
+   "success": true,
+   "steps": 181,
+   "count": 1,
+   "extra": {},
+   "robot": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "light": [
+    0.6792410777291673,
+    [
+     1.0854020419897672,
+     1.1186272169836282,
+     0.9882202978216892
+    ]
+   ],
+   "max_lift_cm": 10.1,
+   "plate_dist_cm": 8.2,
+   "why": "성공"
+  },
+  {
+   "scene": "light",
+   "kinds": [
+    "light"
+   ],
+   "fruit": "Orange",
+   "success": true,
+   "steps": 194,
+   "count": 1,
+   "extra": {},
+   "robot": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "light": [
+    0.5152932496924127,
+    [
+     0.9547521055393304,
+     1.0477930056660905,
+     0.9295648396580057
+    ]
+   ],
+   "max_lift_cm": 10.6,
+   "plate_dist_cm": 1.9,
+   "why": "성공"
+  },
+  {
+   "scene": "light",
+   "kinds": [
+    "light"
+   ],
+   "fruit": "Lemon",
+   "success": true,
+   "steps": 180,
+   "count": 1,
+   "extra": {},
+   "robot": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "light": [
+    0.9661387585844342,
+    [
+     0.9121328681996599,
+     1.1268142733919333,
+     1.1337569832827794
+    ]
+   ],
+   "max_lift_cm": 11.4,
+   "plate_dist_cm": 1.3,
+   "why": "성공"
+  },
+  {
+   "scene": "light",
+   "kinds": [
+    "light"
+   ],
+   "fruit": "Banana",
+   "success": false,
+   "steps": 900,
+   "count": 1,
+   "extra": {},
+   "robot": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "light": [
+    0.7921491668384107,
+    [
+     0.8884526329660737,
+     0.8854230070699747,
+     1.077835023125554
+    ]
+   ],
+   "max_lift_cm": 0.2,
+   "plate_dist_cm": 20.9,
+   "why": "못 들어올림(잡기 실패)"
+  },
+  {
+   "scene": "mixed",
+   "kinds": [
+    "count",
+    "light",
+    "robot"
+   ],
+   "fruit": "Strawberry",
+   "success": true,
+   "steps": 181,
+   "count": 2,
+   "extra": {},
+   "robot": [
+    3.0533959424488124,
+    -0.8442814629133224,
+    -6.37019091973648
+   ],
+   "light": [
+    1.3046731375182148,
+    [
+     0.9877045331241348,
+     1.0574705011946235,
+     1.0845967231279716
+    ]
+   ],
+   "max_lift_cm": 9.4,
+   "plate_dist_cm": 12.2,
+   "why": "성공",
+   "gif": "report_html/assets/policy_act_mix2_100k_color_te01/mixed_00_strawberry_ok.gif"
+  },
+  {
+   "scene": "mixed",
+   "kinds": [
+    "count",
+    "light",
+    "robot"
+   ],
+   "fruit": "Orange",
+   "success": false,
+   "steps": 900,
+   "count": 2,
+   "extra": {},
+   "robot": [
+    8.411974598755823,
+    5.801327565610277,
+    21.568925259401055
+   ],
+   "light": [
+    0.9683567139328029,
+    [
+     0.9137510721184081,
+     0.8696916449502754,
+     0.8739442057228436
+    ]
+   ],
+   "max_lift_cm": 1.4,
+   "plate_dist_cm": 31.7,
+   "why": "못 들어올림(잡기 실패)",
+   "gif": "report_html/assets/policy_act_mix2_100k_color_te01/mixed_01_orange_fail.gif"
+  },
+  {
+   "scene": "mixed",
+   "kinds": [
+    "count"
+   ],
+   "fruit": "Lemon",
+   "success": true,
+   "steps": 192,
+   "count": 3,
+   "extra": {},
+   "robot": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "light": null,
+   "max_lift_cm": 10.7,
+   "plate_dist_cm": 5.1,
+   "why": "성공"
+  },
+  {
+   "scene": "mixed",
+   "kinds": [
+    "robot",
+    "count",
+    "light"
+   ],
+   "fruit": "Banana",
+   "success": true,
+   "steps": 211,
+   "count": 2,
+   "extra": {},
+   "robot": [
+    -1.8133178175210691,
+    -9.445699860263675,
+    13.568318389508804
+   ],
+   "light": [
+    1.4857818902804856,
+    [
+     0.9899085480604797,
+     1.13579481664617,
+     0.898776912511498
+    ]
+   ],
+   "max_lift_cm": 11.7,
+   "plate_dist_cm": 3.7,
+   "why": "성공"
+  },
+  {
+   "scene": "mixed",
+   "kinds": [
+    "light",
+    "robot",
+    "count"
+   ],
+   "fruit": "Strawberry",
+   "success": false,
+   "steps": 900,
+   "count": 2,
+   "extra": {},
+   "robot": [
+    -7.844369434435505,
+    1.2334965761233327,
+    18.499764409999642
+   ],
+   "light": [
+    1.274227116974672,
+    [
+     1.0802385858522197,
+     1.1443600104334786,
+     0.8584911447587847
+    ]
+   ],
+   "max_lift_cm": 0.4,
+   "plate_dist_cm": 24.9,
+   "why": "못 들어올림(잡기 실패)"
+  },
+  {
+   "scene": "mixed",
+   "kinds": [
+    "count",
+    "light",
+    "robot"
+   ],
+   "fruit": "Orange",
+   "success": false,
+   "steps": 900,
+   "count": 3,
+   "extra": {},
+   "robot": [
+    -0.21952594373478895,
+    6.514551806720274,
+    2.42808842600072
+   ],
+   "light": [
+    0.8571832017291673,
+    [
+     1.0917932442647664,
+     0.905913564004717,
+     1.116786709535869
+    ]
+   ],
+   "max_lift_cm": 0.3,
+   "plate_dist_cm": 24.1,
+   "why": "못 들어올림(잡기 실패)"
+  },
+  {
+   "scene": "mixed",
+   "kinds": [
+    "robot",
+    "count",
+    "light"
+   ],
+   "fruit": "Lemon",
+   "success": false,
+   "steps": 900,
+   "count": 2,
+   "extra": {},
+   "robot": [
+    -8.415235095276092,
+    -8.434170112509783,
+    12.32283526098346
+   ],
+   "light": [
+    0.5678028454593674,
+    [
+     1.1411942181847239,
+     0.932262943083104,
+     0.8886171443927701
+    ]
+   ],
+   "max_lift_cm": 0.0,
+   "plate_dist_cm": 18.8,
+   "why": "못 들어올림(잡기 실패)"
+  },
+  {
+   "scene": "mixed",
+   "kinds": [
+    "robot",
+    "light",
+    "count"
+   ],
+   "fruit": "Banana",
+   "success": false,
+   "steps": 900,
+   "count": 2,
+   "extra": {},
+   "robot": [
+    3.465856116858072,
+    -1.1204533715301697,
+    23.922798918035298
+   ],
+   "light": [
+    1.1116677463354852,
+    [
+     1.0545165344274063,
+     1.063793668507883,
+     0.9818391965232726
+    ]
+   ],
+   "max_lift_cm": 0.0,
+   "plate_dist_cm": 28.1,
+   "why": "못 들어올림(잡기 실패)"
+  },
+  {
+   "scene": "distract",
+   "kinds": [
+    "distract"
+   ],
+   "fruit": "Strawberry",
+   "success": true,
+   "steps": 205,
+   "count": 1,
+   "extra": {
+    "Orange": 2,
+    "Lemon": 1
+   },
+   "robot": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "light": null,
+   "max_lift_cm": 11.6,
+   "plate_dist_cm": 3.0,
+   "why": "성공",
+   "gif": "report_html/assets/policy_act_mix2_100k_color_te01/distract_00_strawberry_ok.gif"
+  },
+  {
+   "scene": "distract",
+   "kinds": [
+    "distract"
+   ],
+   "fruit": "Orange",
+   "success": false,
+   "steps": 900,
+   "count": 1,
+   "extra": {
+    "Strawberry": 1
+   },
+   "robot": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "light": null,
+   "max_lift_cm": 0.0,
+   "plate_dist_cm": 40.9,
+   "why": "못 들어올림(잡기 실패)",
+   "gif": "report_html/assets/policy_act_mix2_100k_color_te01/distract_01_orange_fail.gif"
+  },
+  {
+   "scene": "distract",
+   "kinds": [
+    "distract"
+   ],
+   "fruit": "Lemon",
+   "success": false,
+   "steps": 900,
+   "count": 1,
+   "extra": {
+    "Strawberry": 2
+   },
+   "robot": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "light": null,
+   "max_lift_cm": 1.1,
+   "plate_dist_cm": 29.2,
+   "why": "못 들어올림(잡기 실패)"
+  },
+  {
+   "scene": "distract",
+   "kinds": [
+    "distract"
+   ],
+   "fruit": "Banana",
+   "success": false,
+   "steps": 900,
+   "count": 1,
+   "extra": {
+    "Strawberry": 1,
+    "Lemon": 2
+   },
+   "robot": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "light": null,
+   "max_lift_cm": 0.0,
+   "plate_dist_cm": 35.0,
+   "why": "못 들어올림(잡기 실패)"
+  },
+  {
+   "scene": "distract",
+   "kinds": [
+    "distract"
+   ],
+   "fruit": "Strawberry",
+   "success": false,
+   "steps": 900,
+   "count": 1,
+   "extra": {
+    "Orange": 1
+   },
+   "robot": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "light": null,
+   "max_lift_cm": 0.0,
+   "plate_dist_cm": 35.6,
+   "why": "못 들어올림(잡기 실패)"
+  },
+  {
+   "scene": "distract",
+   "kinds": [
+    "distract"
+   ],
+   "fruit": "Orange",
+   "success": false,
+   "steps": 900,
+   "count": 1,
+   "extra": {
+    "Lemon": 1
+   },
+   "robot": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "light": null,
+   "max_lift_cm": 1.6,
+   "plate_dist_cm": 21.9,
+   "why": "못 들어올림(잡기 실패)"
+  },
+  {
+   "scene": "distract",
+   "kinds": [
+    "distract"
+   ],
+   "fruit": "Lemon",
+   "success": false,
+   "steps": 900,
+   "count": 1,
+   "extra": {
+    "Banana": 2,
+    "Orange": 1
+   },
+   "robot": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "light": null,
+   "max_lift_cm": 0.0,
+   "plate_dist_cm": 16.1,
+   "why": "못 들어올림(잡기 실패)"
+  },
+  {
+   "scene": "distract",
+   "kinds": [
+    "distract"
+   ],
+   "fruit": "Banana",
+   "success": false,
+   "steps": 900,
+   "count": 1,
+   "extra": {
+    "Orange": 1
+   },
+   "robot": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "light": null,
+   "max_lift_cm": 0.0,
+   "plate_dist_cm": 16.3,
+   "why": "못 들어올림(잡기 실패)"
+  }
+ ],
+ "wall_s": 2857
+}

@@ -1,0 +1,105 @@
+#usda 1.0
+(
+    defaultPrim = "Root"
+    metersPerUnit = 1
+    subLayers = [
+        @/home/mingyeongmin/student_kit/isaac/assets/scenes/kitchen_fruit/scene.usd@
+    ]
+    upAxis = "Z"
+)
+
+over "Root"
+{
+    def Xform "Strawberry_4"
+    {
+        def "Strawberry_4" (
+            prepend references = @/home/mingyeongmin/student_kit/isaac/assets/scenes/kitchen_fruit/objects/Strawberry/Strawberry.usda@
+        )
+        {
+            double3 xformOp:translate = (0.9, -2.2, 0.01)
+            uniform token[] xformOpOrder = ["xformOp:translate"]
+
+            over "Collisions"
+            {
+                over "mesh" (
+                    prepend apiSchemas = ["MaterialBindingAPI"]
+                )
+                {
+                    rel material:binding:physics = </Root/FruitPhysics/PhysicsMaterial> (
+                        bindMaterialAs = "weakerThanDescendants"
+                    )
+                }
+            }
+        }
+    }
+
+    def Xform "Orange_4"
+    {
+        def "Orange_4" (
+            prepend references = @/home/mingyeongmin/student_kit/isaac/assets/scenes/kitchen_fruit/objects/Orange/Orange.usda@
+        )
+        {
+            double3 xformOp:translate = (0.9, -2.4, 0.01)
+            uniform token[] xformOpOrder = ["xformOp:translate"]
+
+            over "Collisions"
+            {
+                over "mesh" (
+                    prepend apiSchemas = ["MaterialBindingAPI"]
+                )
+                {
+                    rel material:binding:physics = </Root/FruitPhysics/PhysicsMaterial> (
+                        bindMaterialAs = "weakerThanDescendants"
+                    )
+                }
+            }
+        }
+    }
+
+    def Xform "Lemon_4"
+    {
+        def "Lemon_4" (
+            prepend references = @/home/mingyeongmin/student_kit/isaac/assets/scenes/kitchen_fruit/objects/Lemon/Lemon.usda@
+        )
+        {
+            double3 xformOp:translate = (0.9, -2.6, 0.01)
+            uniform token[] xformOpOrder = ["xformOp:translate"]
+
+            over "Collisions"
+            {
+                over "mesh" (
+                    prepend apiSchemas = ["MaterialBindingAPI"]
+                )
+                {
+                    rel material:binding:physics = </Root/FruitPhysics/PhysicsMaterial> (
+                        bindMaterialAs = "weakerThanDescendants"
+                    )
+                }
+            }
+        }
+    }
+
+    def Xform "Banana_4"
+    {
+        def "Banana_4" (
+            prepend references = @/home/mingyeongmin/student_kit/isaac/assets/scenes/kitchen_fruit/objects/Banana/Banana.usda@
+        )
+        {
+            double3 xformOp:translate = (0.9, -2.8, 0.01)
+            uniform token[] xformOpOrder = ["xformOp:translate"]
+
+            over "Collisions"
+            {
+                over "mesh" (
+                    prepend apiSchemas = ["MaterialBindingAPI"]
+                )
+                {
+                    rel material:binding:physics = </Root/FruitPhysics/PhysicsMaterial> (
+                        bindMaterialAs = "weakerThanDescendants"
+                    )
+                }
+            }
+        }
+    }
+}
+

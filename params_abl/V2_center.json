@@ -1,0 +1,4 @@
+{"_note": "분리 실험 V2: mix3 open + fixed_clear 만 (close·T.close 는 v3). 간섭 검사용 finger_thick·gap_ext 포함",
+ "fruits": {"Strawberry": {"open": 45.0, "fixed_clear": 0.011}, "Orange": {"open": 51.0, "fixed_clear": 0.008},
+            "Lemon": {"open": 47.5, "fixed_clear": 0.011}, "Banana": {"open": 37.5, "fixed_clear": 0.011}},
+ "common": {"finger_thick": 0.011, "gap_ext": [[44.0, 71.6], [47.2, 77.9]]}}

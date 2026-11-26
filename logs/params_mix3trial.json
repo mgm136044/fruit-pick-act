@@ -1,0 +1,14 @@
+{
+  "_note": "mix3 잡기 방식 (STRATEGY_W1.md 5-1). close: 접촉보다 12단위 이상 깊게(힘 상한 1.0 N·m 라 실제 힘은 같음, 중심 어긋남 허용 ↑). fixed_clear: 과일을 두 손가락 가운데로. open: 가운데 맞춤만(+10 은 옆 과일에 닿음). T.close 15→24: 깊게 닫을 때 닿는 속도를 낮춤. finger_thick/gap_ext: 간섭 검사를 실제 손가락 두께·넓은 벌림까지 맞게.",
+  "fruits": {
+    "Strawberry": {"close": 8.0, "open": 45.0, "fixed_clear": 0.011},
+    "Orange": {"close": 15.0, "open": 51.0, "fixed_clear": 0.008},
+    "Lemon": {"close": 10.0, "open": 47.5, "fixed_clear": 0.011},
+    "Banana": {"close": 4.0, "open": 37.5, "fixed_clear": 0.011}
+  },
+  "common": {
+    "T": {"close": 24},
+    "finger_thick": 0.011,
+    "gap_ext": [[44.0, 71.6], [47.2, 77.9]]
+  }
+}

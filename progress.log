@@ -1,0 +1,148 @@
+[2026-11-24 22:33] 자료 읽기 완료
+## 파일별 핵심
+- 00_PROMPT.md: 수업 키트(Isaac Sim 6.2/Isaac Lab 3.0/LeRobot 0.6.1)에서 record.py와 같은 형식의 LeRobot 데이터셋을 상태머신으로 사람 없이 생성. 로컬에만 두고 업로드·제출 금지.
+- 01_리서치_요약.md: 오렌지 데이터(HF leisaac-pick-orange)엔 물체 위치가 없어 단순 재생 불가. 레몬은 오렌지 기반 가능, 딸기는 보정 필요, 바나나는 어려움. 상태머신이 가장 빠름. 그리퍼 명령은 실제 접촉보다 2.5~4단위 더 닫힘.
+- 세팅가이드 PDF: 드라이버 595.58+, GPU 8GB+(권장 12GB). 5-3: 과일 고르게 15~25개, 일관된 시연, 정지 전 멈춤 금지, 장면 다양화(개수·방해 과일·로봇 위치)와 기본 장면 섞기. 평가 24에피소드, 비공개 환경, 30초. 모델 입력 front/wrist 3x480x640 + state 6, 출력 action 6.
+- NOTICE.txt: 장면·로봇·카메라는 LeIsaac(Apache-2.0), 과일은 YCB 메시.
+- setup/install.sh: ~/robot_course에 uv venv(Python 3.12). 1/5에서 드라이버<595.58, glibc<2.35, 디스크<40GB면 실패. torchcodec 제거(pyav 사용).
+- pick_fruit.py: 30Hz(60Hz/decimation 2), front·wrist 640x480, action=관절 rad 절대값 6개, 그리퍼 effort 1.0 N·m, 팔 10 N·m, stiffness 17.8. 로봇 베이스 (2.2,-0.61,0.89) z축 180°. COURSE_RENDER=default/dlss_perf/dlss_perf_lite. fix_fruit(), task_text().
+- mdp.py: 성공 = 과일 root 위치가 접시 root에서 |dx|,|dy|<0.10, -0.07<dz<0.07. 안 쓰는 과일은 PARK. env.fixed_fruit로 생성 후 과일 고정.
+- so101.py: 팔 -100~100 ↔ USD 한계, 그리퍼 0~100 ↔ -10°~100°. 휴식 자세 (0,-100,90,50,0,-10)°.
+- paths.py: FRUITS=(Strawberry,Orange,Lemon,Banana), 종류마다 복사본 3개(objects.json 기준), PARK 위치.
+- objects.json: 과일 z 0.924, Strawberry(2.126,-0.304) Orange(2.154,-0.405) Lemon(2.2,-0.36) Banana(2.249,-0.332), Plate(2.415,-0.338,0.937).
+- record.py: dataset create(268~280행) robot_type so101_follower, fps 30, video, features 4개. add_frame(487) state=실제 관절→정규화, action=리더 값 그대로(float32). save_episode(parallel_encoding=False)(542). 변형 장면은 AREA_X 1.95~2.30, AREA_Y -0.48~-0.26에 무작위 위치·yaw ±180°, 접시 0.14m·로봇 0.17m·과일 간 0.075(바나나 0.11) 간격. robot ±10cm/±30°.
+- run_policy.py: 과일 순환, 시작 자세 3스텝 유지 후 정책 실행, 접시 위 판정되면 즉시 성공 종료(휴식 자세 조건 없음).
+- pack_dataset.py: <dataset>_train/ 에 zip + train.sh + train_act.py.
+- check_env.py: 헤드리스로 이미지 저장, 스텝 시간, 과일별 성공 판정 확인.
+- train.sh/train_act.py: lerobot_train, ACT, 2만 스텝, 배치 8, pyav, 이미지 크기 480x640 검사.
+- checkpoint_spec.py: 이미지 키 front/wrist [3,480,640], state 6, action 6, ACT만.
+- 12장 교안: 수집 방식 ① 텔레오퍼레이션 ② 스테이트 머신(사람 없이 밤새, 성공만 저장, 궤적이 기계적·다양성 낮음) ③ MimicGen(소수 시연을 배치 변화로 확장, IK·서브태스크 주석 필요).
+- 12주차 실습 HTML / sim_bridge README: LeIsaac PickOrange(Isaac Sim 5.1, 드라이버 580 계열) 실습과 ZeroMQ 평가 브리지. 성공에 휴식 자세(±30°) 조건 있음. 드라이버 615.71.09에서 Isaac Sim 5.1 시작 충돌 보고(#912). 참고용.
+
+## 프롬프트와 실제 파일이 다른 곳 (실제 파일을 따름)
+- 성공 판정 기준은 "과일 중심"이 아니라 과일 root 위치(root_pos_w). YCB 메시 원점이 기하 중심인지는 미확인.
+- record.py는 기본 장면(count 1, 방해 과일 없음)에서 과일을 기준 자리 ±3cm, yaw 0으로 다시 놓는다. 무작위 yaw(±180°)는 변형 장면에서만 쓴다. --robot만 바꾸면 기본 장면으로 취급돼 과일 위치는 기준 ±3cm 그대로다.
+- 수업 키트 성공 판정에는 휴식 자세 조건이 없다(LeIsaac 실습과 다름). 팔 정리는 가이드 5-3 권장 사항이다.
+- record.py --fake-leader도 stdin으로 Enter(시작)·Enter(정지)·y(저장)를 받아야 한다. stdin EOF면 q로 처리된다.
+- sim_bridge zip은 최상위가 sim_bridge/라서 ~에 풀어 ~/sim_bridge를 만들었다.
+- 가이드 문제 해결 표의 "리더 암을 시작 자세에 맞추기"와 달리 record.py는 시작 자세를 검사하지 않는다.
+
+[2026-11-24 22:36] 0단계 확인
+- ~/student_kit 압축 풂 (157MB), ~/sim_bridge 압축 풂
+- GPU RTX 3050 6GB, 드라이버 580.178.04 (< 595.58), CUDA 13.0, RAM 30GB, 스왑 없음, / 여유 63GB, glibc 2.35, libGLU 있음, Ubuntu 22.04.5
+- 설치 가능한 드라이버: nvidia-driver-595 / 595-open = 595.99.02 (ubuntu-drivers 추천: nvidia-driver-595-open). 615도 목록에 있음.
+- [멈춤] 드라이버 595.58 미만 → install.sh 1/5에서 실패하는 조건. 사용자에게 드라이버 업데이트와 재부팅 요청. 설치는 시작하지 않음.
+- 주의: 드라이버를 바꾸면 conda env_isaaclab(Isaac Sim 5.1, 580 계열 검증)에 영향이 있을 수 있음. 595에서의 5.1 동작은 미확인.
+[2026-11-24 22:42] 드라이버 595.99.02 확인 (사용자 업데이트·재부팅). install.sh 시작
+[2026-11-24 22:43] install.sh 1/5에서 종료 코드 141: ldd --version | head -1 이 pipefail 로 SIGPIPE. 원본 대신 setup_fix/install_fixed.sh(3줄 수정)로 재시도
+[2026-11-24 23:02] 설치 완료 (isaacsim 6.2.0.0 · isaaclab 3.0.0 · lerobot 0.6.1 · torch 2.11.0+cu130). 디스크 여유 39G
+[2026-11-24 23:06] check_env 통과 (기본 렌더링, --viz none): 스텝 87.4ms(11.4Hz), GPU 최고 4309/6144MiB, RAM 최고 13.1GB, 4과일 성공 판정 True, 소요 3분24초. dlss 불필요
+[2026-11-24 23:21] 탐색: FK 검증 오차 0, 과일 메시 실측(딸기45/오렌지55/레몬51x50x45/바나나 단면34mm), 접시 지름 202mm 높이 37mm. 생성기 시험 8회 전부 성공(중력 보상·과일 위 정지 추가)
+[2026-11-24 23:22] 0단계 6번: record.py --fake-leader 기준 데이터 1에피소드(83프레임) → ref_fake, meta/info.json 을 ref_info.json 으로 저장
+[2026-11-24 23:22] 1단계 파일럿 시작: 과일별 5개, vary 0.5, start-perturb 0.25 → pilot_v1
+[2026-11-24 23:23] 파일럿 1차 실행이 시작 직후 들여쓰기 오류로 종료(에피소드 0개, 방금 만든 빈 pilot_v1 폴더 삭제 후 재실행)
+[2026-11-24 23:35] 파일럿 완료: 4과일 각 5/5 성공(20/20), 712초, 에피소드당 약 36초
+[2026-11-24 23:35] 본 생성 시작: 과일별 25개 → ~/datasets/fruit_scripted_v1 (seed 2)
+[2026-11-24 23:37] 3단계 준비: HF 오렌지 parquet 받음(3.1MB), 쥔 구간 151개 검출(그리퍼가 명령보다 덜 닫힌 구간), 접시와 겹치는 28개 제외 예정. 목표-실제 지연 2프레임으로 우리 30Hz 데이터와 같음 → 30Hz 기록으로 추정, stride 1 재생
+[2026-11-25 00:10] v1 레몬 시도7 '접시 밖': 놓을 때 레몬이 손가락에 끼어 휴식 자세까지 딸려감. v1 은 그대로 두고 이후 생성용으로 놓는 그리퍼 값을 open+6 으로 수정(v1 코드는 logs/gen_scripted_v1_snapshot.py)
+[2026-11-25 00:21] v1 레몬 실패 원인 분석: 레몬 메시 주축 58.5x45.6mm(대각선 방향), 딸기 54.6x41.9mm. 둥근 과일로 다뤄 긴 축으로 쥔 경우 끼임/미끄러짐. 이후 생성용으로 레몬·딸기도 짧은 축을 가로질러 쥐게 수정(폭 46/42mm, 닫힘 25.5/23)
+[2026-11-25 00:42] v1 본 생성 완료: 딸기 25/26, 오렌지 25/25, 레몬 25/30, 바나나 25/34 (100/115). 바나나 놓침 9건은 대부분 벌린 손가락이 옆 바나나/과일에 걸림
+[2026-11-25 00:42] 2단계 v1 검증: features 동일, pyav 디코딩 OK, 100에피소드 29414프레임, NaN 없음, pack_dataset 묶음 생성(업로드 안 함)
+[2026-11-25 00:53] v2 시험(변형 장면만): 레몬 8/8, 바나나 6/8, 딸기 진행중. 바나나 놓침 원인: 가운데 중심선이 로컬 y 에서 12.3° 돌아감 → 잡는 점을 y=-20mm(폭 31.6mm)로, 고정 손가락 여유 7mm
+[2026-11-25 01:01] 수정 생성기 시험(변형 장면만): 레몬 8/8, 딸기 8/8, 바나나(잡는 점 수정 후) 12/12. v2(과일별 50개) 생성 시작 → ~/datasets/fruit_scripted_v2
+[2026-11-25 01:02] 팀원 데이터 점검: 레몬 60/딸기 60, 형식 기준과 동일, 작업 문구 정상, 모든 에피소드 끝 프레임에 과일이 접시 위·팔 휴식 자세. 딸기 ep55 불량(처음부터 접시 위, 1.8초 정지) → 제외한 복사본 생성
+[2026-11-25 01:04] 팀원 딸기 ep55 제외 복사본 ~/datasets/team_strawberry_clean (59에피소드, 형식 동일). 혼합 스크립트 make_mix.py 시험 OK(mix_test). 원본 수정 없음(시각 확인)
+[2026-11-25 01:09] 사용자 요청: v2 끝나면 학습까지(로컬). 가설 검증 계획: 자동 데이터만(v1+v2, 다른 종류 방해 과일 장면 제외)으로 ACT 학습 → run_policy(기본 환경) + eval_proxy(변형 장면) 평가. 3단계는 학습 뒤
+[2026-11-25 01:25] 과일별 HTML 보고서 생성기 make_report.py → report_html/ (index + 과일 4페이지, GIF 8개 약 2MB씩, SVG 차트). 렌더링 확인(snap firefox 헤드리스)
+[2026-11-25 01:41] 사용자 결정: 보고서 웹 공개(홈페이지·github.io) 안 함, 로컬 보존. 보고서 HTML 을 GIF 내장 단일 파일로 변경
+[2026-11-25 03:02] 사용자 정보: 서버 평가에는 다른 종류 과일 장면 없음, 같은 과일 여러 개 중 하나 옮기기만 있음(예: 바나나 4개, 레몬 3개 — 키트 장면은 종류당 3개). 사용자: 일반화 위해 변형은 계속 → 생성기 그대로. 학습 1차 no_other_fruit, 2차 전체 포함 A/B. eval_proxy 점수에서 distract 제외(참고 지표), mixed 에서도 제외. v2 생성기 스냅샷 logs/gen_scripted_v2_snapshot.py
+[2026-11-25 03:09] v2 완료: 207 시도 200 저장 (딸기 50/52, 오렌지 50/50, 레몬 50/53, 바나나 50/52), 총 7664s, GPU 최고 4325MiB, 1.2G. 남아 있던 탐색용 gpu_watch(8402) 종료
+[2026-11-25 03:13] 학습 속도 측정(100스텝, 배치 8): 1.88 step/s, GPU 최고 4597MiB/6144 → 2만 스텝 약 3시간. 학습 데이터 ~/datasets/fruit_scripted_act (v1_act 73 + v2 no_other_fruit 143 = 216 ep, 63,294 프레임, zip 1252MB). 본 학습 시작: run_training.sh 20000 8 → train_runs/act_scripted_v12/outputs/act_scripted_v12
+[2026-11-25 03:14] v2 검증: features 동일, 디코딩 OK, 200 ep 58,916 프레임, 시트 check_v2 정상. summary → logs/summary_v2.md. 생성기에 --vary-use, --count3-prob 옵션 추가(기본값=v2 동작, v3 용)
+[2026-11-25 03:16] 평가 자동 실행 대기(run_eval.sh): 학습 끝나면 run_policy 24 → eval_proxy(장면 6×8, 롤아웃 GIF) → HTML 갱신. REPORT.md 에 v1/v2 결과·실패·검증·팀원·전략·재현 명령 채움(결론·학습·다음 단계는 평가 뒤)
+[2026-11-25 03:21] 로드맵 문서 ROADMAP.md 작성 (사용자 요청: 단계마다 확인·갱신)
+[2026-11-25 06:13] 학습 완료 확인: train_runs/act_scripted_v12/outputs/act_scripted_v12/checkpoints/last/pretrained_model
+[2026-11-25 06:13] 1차 학습 완료: 2만 스텝, loss 6.745(200) → 0.501(4K) → 0.209(8K) → 0.157(12K) → 0.124(16K) → 0.106(20K). submission_act_scripted_v12.zip 191MB (제출 안 함)
+[2026-11-25 06:19] 1차 평가 중간: run_policy 처음 6개 중 2 성공(바나나 184스텝, 오렌지 490스텝). 시작 자세 불일치 아님 확인(리셋 자세 = 데이터 첫 프레임 평균). eval_proxy 에 실패 유형 진단(최고 들림·접시 거리) 추가. run_variants.sh 대기: 평가 끝나면 n_action_steps 50/20, temporal ensemble 0.01 을 기본·같은 과일 여러 개 장면 8개씩 비교
+[2026-11-25 06:33] run_policy 24: 성공률 0.542 (24 에피소드) · 딸기 0.33 · 오렌지 0.50 · 레몬 0.33 · 바나나 1.00
+[2026-11-25 06:33] 1차 평가 run_policy(기본 환경 24): 13/24 = 54.2% · 딸기 2/6 · 오렌지 3/6 · 레몬 2/6 · 바나나 6/6. 성공 스텝 중앙 202(6.7초), 최대 800. 470~800스텝 성공은 다시 잡기로 추정(데이터엔 재시도 없음). 오프라인 점검(학습 데이터 프레임): 그리퍼 쥐기 값은 정확(딸기 23 vs 22~22.7), 팔 관절 평균 오차 2~6단위 → 작은 과일 정밀도 부족 추정
+[2026-11-25 06:37] 실패 모습(eval_proxy default 딸기 GIF): 잡는 위치가 1~2cm 치우쳐 가장자리만 스침 → 빈손으로 접시까지 → 휴식 → 다시 시도 중 시간 초과. 생성기에 DART 옵션 추가(--dart-prob/--dart-deg, 기본 끔=v2 와 동일 동작, 전용 난수, 적분 보정은 흔들린 목표 기준). 오프라인 점검 스크립트 offline_check.py
+[2026-11-25 07:14] eval_proxy 중간(35/48): default 4/8, count 0/8, light 2/8, robot 1/8, mixed 0/3 → 기본 장면 밖 일반화 부족(학습 데이터 73% 기본 장면). 생성기에 --single-random-prob(과일 1개도 영역 전체 무작위), --light-prob/--light-int/--light-col(조명 무작위, eval_proxy 와 같은 /World/Light) 추가. 기본값 끔 = v2 동작 그대로
+[2026-11-25 07:27] eval_proxy (n_action_steps 기본): SCORE(서버형 장면 성공률 평균 ×100, distract 제외): 20.0 {"default": {"success": 0.5, "per_fruit": {"딸기": 0.0, "오렌지": 1.0, "레몬": 0.0, "바나나": 1.0}}, "count": {"success": 0.0, "per_fruit": {"딸기": 0.0, "오렌지": 0.0, "레몬": 0.0, "바나나": 0.0}}, "robot": {"success": 0.125, "per_fruit": {"딸기": 0.0, "오렌지": 0.0, "레몬": 0.0, "바나나": 0.5}}, "
+[2026-11-25 07:28] eval_proxy 1차 최종: 서버형 점수 20.0 (default 4/8, count 0/8, robot 1/8, light 2/8, mixed 1/8; distract 1/8). 실패 39 = 못 들어올림 26 + 들었지만 접시 밖 13. GIF: 같은 과일 여러 개 장면에서 실제 과일이 아니라 기본 장면의 과일 자리로 감 → 위치를 보지 않고 기본 궤적을 외움. 실행설정 비교(run_variants)는 중단(핵심 문제 아님, 2차 모델에서), GPU 를 v3 생성에 씀
+[2026-11-25 07:32] v3 옵션 시험1(v3test): 딸기 2/2, 오렌지 2/2, 레몬 1번째 실패(DART 흔들림이 하강까지 남아 35mm 위에서 막힘). DART 수정: 흔들림은 과일 위로 가는 동안만, 멈춤 앞 40%에서 0, DART 에피소드는 멈춤 +10프레임. layout 로그에 single_random·light 추가. 시험2(v3test2) 시작
+[2026-11-25 07:39] v3 옵션 시험2(v3test2, DART 수정 후): 레몬 3/3, 딸기 3/3, 바나나 3/4 (실패 1: 로봇 25° 회전 + 다른 과일 2종). 과일 위 도착 오차 최대 16mm → 멈춤 동안 1mm 안으로 복귀, 밀림 0. v3 본 생성 시작: --per-fruit 100 --max-attempts 200 --vary-prob 0.85 --vary-use count=0.75,extra=0.3,robot=0.5 --count3-prob 0.6 --single-random-prob 1.0 --light-prob 0.5 --dart-prob 0.5 --start-perturb-prob 0.3 --seed 4 → ~/datasets/fruit_scripted_v3 (코드 스냅샷 logs/gen_scripted_v3_snapshot.py)
+[2026-11-25 07:40] HTML 보고서에 1차 학습 정보(train_meta.json)·loss·평가표·정책 롤아웃 GIF(앞 15초, 5fps 축소본) 추가. REPORT.md 2-7(1차 학습·평가)과 중간 결론 작성
+[2026-11-25 08:10] 2차 학습 준비: make_mix 에 vary_only 필터, run_training2.sh (v3 전체 + v1·v2 변형 + v2 기본 과일별 13). --augment 는 안 쓰기로: LeRobot 기본 증강에 RandomAffine(이동 5%·회전 5°) 포함 → 위치 파악에 해가 될 수 있음, 조명 변화는 v3 에 실제로 있음
+[2026-11-25 10:40] after_v3.sh 대기: v3 끝나면 GPU 기록 중지 → verify_dataset(check_v3) → 형식 동일하면 2차 학습 run_training2.sh 40000 8 자동 시작
+[2026-11-25 12:42] v3 완료: SUMMARY {"Strawberry": {"attempts": 101, "saved": 100, "stats": {"성공": 100, "놓침": 1}, "relayouts": 6}, "Orange": {"attempts": 108, "saved": 100, "stats": {"성공": 100, "놓침": 8}, "relayouts": 3}, "Lemon": {"attempts": 101, "saved": 100, "stats": {"성공": 100, "놓침": 1}, "relayouts": 5}, "Banana": {"attempts": 119, "saved": 100, "stats": {"놓침": 12, "성공": 100, "미끄러짐
+[2026-11-25 12:43] v3 검증: features 비교: 동일 디코딩 OK: 9.6 s (처음/끝), {'frames': 320, 's': 3.7} 
+[2026-11-25 12:43] 2차 학습 시작: run_training2.sh 40000 8
+[2026-11-25 12:47] after_v3.sh 가 44분 멈춤(대기용 pgrep -f 가 실행한 셸 명령줄과 일치). 생성은 11:58 정상 종료. 대기 없는 사본 after_v3b.sh 로 검증·학습 이어서 실행. v3 요약: 400/429(93%), 119,005프레임, 2.4GB, 무작위 배치 100%(기본 자리 0%), 같은 과일 2개 103·3개 169, 다른 종류 105, 로봇 이동 172, 조명 199, DART 194, 시작 자세 125 (logs/summary_v3.md). 실패 29건은 DART 와 무관(바나나 19). run_eval.sh/run_variants.sh 학습 폴더를 이름으로 받게 고침(1차 사본 logs/run_*_v12_snapshot.sh), after_train2.sh 로 2차 평가 자동 연결
+[2026-11-25 12:51] 2차 학습 시작 확인: 589에피소드 174,781프레임(v3 400 + v2 변형 100 + v1 변형 37 + v2 기본 52), 기본 자리 19%·같은 과일 2~3개 61%·다른 종류 32%·로봇 이동 43%·조명 34%·DART 33%. 1.90 step/s → ~18:40 완료 예상. zip 3,679MB, 디스크 여유 85GB
+[2026-11-25 12:51] 같은 과일 4개 장면 재현: build_scene_c4.py → assets_c4/ (원본 scene.usd sublayer + <과일>_4, 키트 원본 수정 없음, 키트의 COURSE_ASSETS 사용). pxr 조립 확인 종류마다 강체 4개, CPU 배치 시험 바나나 4개 300/300. gen_scripted.py --count4-prob(기본 0, 0이면 기존 난수 순서 그대로)·layout.placed 기록, eval_proxy.py count4 장면 추가(사본 logs/eval_proxy_pre_c4_snapshot.py). after_train2.sh 에 count4 16에피소드 평가 추가해 다시 실행
+[2026-11-25 12:55] 보고서 생성기(make_report.py) 갱신: v3 단계 추가(4번째 색 #eda100/#c98500, 팔레트 검사 통과), 학습 여러 개 비교(--train-run 기본 act_scripted_v12,act_scripted_v3mix: 평가 장면별 비교 막대+표, 실행 설정 비교, 학습별 loss, 롤아웃 GIF), loss 축은 계획 스텝까지. 사본 logs/make_report_pre_v3_snapshot.py. run_eval.sh 의 보고서 호출을 두 학습 비교로. v3 실패 분석: 로봇에서 33cm 넘게 먼 과일 실패 바나나 54%·오렌지 43% vs 가까우면 11%·5% (REPORT 2-4)
+[2026-11-25 12:58] 사용자 확인: 자동 생성 데이터 사용 허용. 학교 GPU 학습용 HF 업로드 요청 → 업로드 묶음 ~/datasets/fruit_scripted_mix2_train(zip 3,679MB + train.sh + train_act.py + README.md 작성), 업로드 명령은 사용자에게 제시(외부 전송은 사용자가 실행). REPORT·make_report·ROADMAP·메모리의 '규칙 확인 필요' 표시 갱신
+[2026-11-25 13:18] 사용자 요청("너가 올려줘")으로 HF 업로드 시작: 비공개 dataset 저장소 mgm136044/fruit_scripted_mix2_train ← ~/datasets/fruit_scripted_mix2_train (zip 3,679MB + train.sh + train_act.py + README.md)
+[2026-11-25 13:24] HF 업로드 완료(338초): 비공개 mgm136044/fruit_scripted_mix2_train, commit 19db9d8c9731. 검증: 4개 파일 크기·해시(zip sha256 eca47d3d…, 나머지 git sha1) 로컬과 모두 같음
+[2026-11-25 18:46] 2차 학습 완료 → 2차 평가 시작
+[2026-11-25 18:46] 학습 완료 확인: train_runs/act_scripted_v3mix/outputs/act_scripted_v3mix/checkpoints/last/pretrained_model
+[2026-11-25 19:10] run_policy 24: 성공률 0.333 (24 에피소드) · 딸기 0.00 · 오렌지 0.17 · 레몬 0.50 · 바나나 0.67
+[2026-11-25 19:41] (Aside) 1주차 데이터셋 제출용 업로드 시작: upload_dataset.py ~/datasets/fruit_scripted_mix2 → 비공개 mgm136044/fruit_w1 (로그 logs/upload_fruit_w1.log)
+[2026-11-25 19:52] 사용자 결정: 로컬 추가 학습(v4·3차) 안 함 — 학교 GPU 에서 mix2 로 10만 스텝 학습 중. 로컬은 2차 평가·실행 설정 비교만 마저 진행, 학교 체크포인트를 받으면 같은 평가로 측정
+[2026-11-25 19:59] eval_proxy (n_action_steps 기본): SCORE(서버형 장면 성공률 평균 ×100, distract 제외): 32.5 {"default": {"success": 0.5, "per_fruit": {"딸기": 0.5, "오렌지": 0.0, "레몬": 0.5, "바나나": 1.0}}, "count": {"success": 0.25, "per_fruit": {"딸기": 0.0, "오렌지": 0.5, "레몬": 0.0, "바나나": 0.5}}, "robot": {"success": 0.375, "per_fruit": {"딸기": 0.0, "오렌지": 0.0, "레몬": 0.5, "바나나": 1.0}}, 
+[2026-11-25 20:16] 같은 과일 4개 장면(assets_c4) 16: SCORE(서버형 장면 성공률 평균 ×100, distract 제외): 31.2 {"count4": {"success": 0.312, "per_fruit": {"딸기": 0.0, "오렌지": 0.5, "레몬": 0.25, "바나나": 0.5}}} 2026-11-25T11:00:11Z [5,391ms] [Error] [omni.physx.plugin] PhysX Shape failed to be created on a prim: /World/envs/env_0/Scene/Scene/light_switch_2_room/_body_0/object/visuals!
+[2026-11-25 20:19] 2차 평가 정리: run_policy 33.3%(1차 54.2%, p≈0.24) · 서버형 점수 32.5(1차 20) · 같은 과일 2~3개 2/8(1차 0/8) · 4개 장면 5/16. 실패 대부분 잡기 실패, 딸기 1/14. REPORT 결론·2-7·3·4·6, ROADMAP, train_meta 갱신
+[2026-11-25 20:36] 변형 실행설정 n50: SCORE(서버형 장면 성공률 평균 ×100, distract 제외): 0.0 {"default": {"success": 0.0, "per_fruit": {"딸기": 0.0, "오렌지": 0.0, "레몬": 0.0, "바나나": 0.0}}, "count": {"success": 0.0, "per_fruit": {"딸기": 0.0, "오렌지": 0.0, "레몬": 0.0, "바나나": 0.0}}}
+[2026-11-25 20:54] 변형 실행설정 n20: SCORE(서버형 장면 성공률 평균 ×100, distract 제외): 18.8 {"default": {"success": 0.25, "per_fruit": {"딸기": 0.5, "오렌지": 0.0, "레몬": 0.5, "바나나": 0.0}}, "count": {"success": 0.125, "per_fruit": {"딸기": 0.5, "오렌지": 0.0, "레몬": 0.0, "바나나": 0.0}}}
+[2026-11-25 21:15] 변형 실행설정 te01: SCORE(서버형 장면 성공률 평균 ×100, distract 제외): 25.0 {"default": {"success": 0.25, "per_fruit": {"딸기": 0.0, "오렌지": 0.0, "레몬": 1.0, "바나나": 0.0}}, "count": {"success": 0.25, "per_fruit": {"딸기": 0.0, "오렌지": 0.0, "레몬": 0.5, "바나나": 0.5}}}
+[2026-11-25 21:17] 실행 설정 비교 정리(기본+같은 과일 2~3개 16): n100 6/16 · n50 0/16(p≈0.02) · n20 3/16 · te01 4/16 → config.json 은 기본값 그대로. 늘어난 실패는 '들었지만 접시 밖'(1→9→12)
+[2026-11-26 03:25] 학교 GPU 모델 검증 act_mix2_100k_color (HF mgm136044/act_mix2_100k_color, zip sha256 8e0d40b6… = HF 메타데이터 일치): 키트 check_submission 통과(act 120번×2 NaN 없음, 평균 2~8ms). config 는 로컬 2차와 동일(n_action_steps 100), train_config 10만 스텝·배치 16·seed 1000·색 증강(밝기·대비·채도·색조). 정규화 통계 로컬 2차와 완전히 같음(같은 mix2 데이터), 가중치 NaN 없음, 학습되는 텐서 전부 바뀜(같은 81개는 고정 BN·위치 인코딩). 오프라인 점검(mix2 과일별 3ep, 앞 30스텝 MAE): 4만 대비 약 절반(딸기 pan 5.42→2.04, elbow 5.62→2.43). 시뮬 평가는 GPU 를 다른 학습(vibration PPO 2.4GB)이 쓰고 있어 미실행 → train_runs/act_mix2_100k_color 에 run_eval.sh 형식으로 배치
+[2026-11-26 03:47] 사용자 결정: act_mix2_100k_color 시뮬 평가는 GPU 가 비어도 자동 시작하지 않음 — 사용자가 알려 줄 때 시작. 대기 중인 평가 스크립트·cron 없음 확인
+[2026-11-26 04:06] act_mix2_100k_color 평가 대기 시작 (after_gpu_free.sh): GPU 가 3분 연속 비면 시작
+[2026-11-26 04:06] 사용자 결정 변경: act_mix2_100k_color 평가를 GPU 가 비면 바로 시작 → after_gpu_free.sh 실행(대기 조건: 계산 프로세스 없음·1GB 미만·~/jobs/*/run.sh 없음 3분 연속). 현재 kobi20-walk-mixed PPO 97M/100M 스텝, 뒤 clip 학습은 04:03 취소됨. make_report.py: 학교 모델처럼 loss 기록 없는 학습도 평가 비교에 넣게 수정(사본 logs/make_report_pre_100k_snapshot.py), 기본 비교 목록에 act_mix2_100k_color 추가
+[2026-11-26 04:10] GPU 빔 → act_mix2_100k_color 평가 시작 (run_policy 24 → eval_proxy 장면당 8 → 같은 과일 4개 16, 약 1.5시간)
+[2026-11-26 04:10] 학습 완료 확인: train_runs/act_mix2_100k_color/outputs/act_mix2_100k_color/checkpoints/last/pretrained_model
+[2026-11-26 04:13] 겹침 기록: 다른 프로젝트 작업 kobi20-eval-final 이 04:09:23 시작 → after_gpu_free.sh 는 마지막 확인(3번째) 뒤 60초 쉬고 다시 확인 없이 04:10 평가 시작(스크립트 빈틈) → 두 작업이 GPU 동시 사용(4095+414MiB), kobi20 평가는 04:12:56 중지됨(로그: another GPU job started). 다시 대기열에 들어간 작업 없음. 고칠 것: wait_gpu 마지막 확인 직후 바로 시작(실행 중인 셸 스크립트라 끝난 뒤 수정)
+[2026-11-26 04:33] run_policy 24: 성공률 0.292 (24 에피소드) · 딸기 0.00 · 오렌지 0.33 · 레몬 0.17 · 바나나 0.67
+[2026-11-26 04:52] 2부 시작(1주차 마감 전략): 사용자가 보낸 ~/Downloads/ACT_1주차_전략정리.md·데이터생성_mix3_프롬프트.md(NFD 파일명)·서버 안내 PDF 정독. 서버 결과(같은 10만 가중치): n100 37.5·n30 45.8·n20 50.0·te0.01 54.2, 리더보드 1위 62.5. 최종 순위는 주 최고 제출을 다른 배치로 재평가. 로컬 4만 모델 실행설정 비교(n100 최고)와 경향 반대 — eval_proxy 덮어쓰기 코드(82~90행)는 정상 확인. Fable 독립 분석 시작(사실·경로만 전달). ROADMAP 에 2부 추가(사본 logs/ROADMAP_part1_snapshot_20261126.md)
+[2026-11-26 05:16] Fable 1차 검토 받음 → 핵심 주장 코드로 확인(성공 판정 ±10cm·±7cm, 접시 ±3cm, 그리퍼 1.0N·m·강성17.8, 쥐기값·고정 손가락 여유 5mm, 이어 학습, te 음수 허용, v3 기본 자리 60개 = REPORT '0%' 틀림). 통합 전략 초안 STRATEGY_W1.md 작성, Fable 2차 비판 요청
+[2026-11-26 05:24] eval_proxy (n_action_steps 기본): SCORE(서버형 장면 성공률 평균 ×100, distract 제외): 30.0 {"default": {"success": 0.5, "per_fruit": {"딸기": 0.5, "오렌지": 1.0, "레몬": 0.0, "바나나": 0.5}}, "count": {"success": 0.375, "per_fruit": {"딸기": 0.0, "오렌지": 0.0, "레몬": 1.0, "바나나": 0.5}}, "robot": {"success": 0.375, "per_fruit": {"딸기": 0.0, "오렌지": 0.0, "레몬": 1.0, "바나나": 0.5}},
+[2026-11-26 05:28] Fable 2차 비판 반영(벌림 +10 철회·가운데 맞춤, T.close 24, 다시 잡기는 P4 로, A 먼저 학습, 고정 묶음=W0 장면, 과일별 실행) → STRATEGY_W1.md 2판, ROADMAP 2부 단계표 재작성. 확인: 10만 eval_proxy 성공 14 중 7 이 2·3번째 시도, GAP_TABLE 42° 잘림, --augment 기본 증강 전체
+[2026-11-26 05:45] act_mix2_100k_color 같은 과일 4개 장면(assets_c4) 16: SCORE(서버형 장면 성공률 평균 ×100, distract 제외): 25.0 {"count4": {"success": 0.25, "per_fruit": {"딸기": 0.0, "오렌지": 0.0, "레몬": 0.25, "바나나": 0.75}}} 
+[2026-11-26 05:45] 보고서 갱신 (1차·2차·학교 10만 비교)
+[2026-11-26 05:46] P0-c 시작: act_mix2_100k_color te0.01 (config 사본) W0 와 같은 장면 48 + 4개 16
+[2026-11-26 05:46] W0 끝: 4개 장면 4/16(25.0). 사용자 결정: 방해 과일 0%, 로컬 GPU 과일 전용(목 06~금 오전), 오늘 남은 제출은 te zip 재제출(사용자), 학교 이어 학습은 학교 에이전트용 프롬프트 prompts/school_P0a_mix2_200k.md(맥미니 전송은 sudo 필요 → 사용자 실행). eval_proxy.py 에 진단용 --grip-remap 추가(사본 logs/eval_proxy_pre_griprmp_snapshot.py), make_te_zip.sh 작성(te 사본+zip+형식 검사), run_p0c.sh 시작
+[2026-11-26 05:51] P1-code: gen_scripted.py 에 mix3 옵션(--nearest-margin, --single-mid-prob/range, --plate-prob/range(변형 장면만, 로봇과 0.22m 이상), --far-prob/min, --allow-plain-vary, finger_thick·gap_ext, 쥐는 동안 이동량 grasp_shift_mm 기록; 기본값=v3 동작, 사본 logs/gen_scripted_pre_mix3_snapshot.py), params_mix3.json(close 8/15/10/4, open 45/51/47.5/37.5, fixed_clear 11mm(오렌지 8), T.close 24), make_mix.py 에 scene_index.json(합친 번호→원본·장면, 길이로 순서 확인; 시험 통과), run_mix3.sh(과일별 실행·시드·.done 이어하기), after_p0c_trial.sh(P0-c 뒤 시험 생성 과일당 10)
+[2026-11-26 05:52] 사용자: 학교 프롬프트 맥미니로 보냄. 제출 기록표 logs/submissions.md 작성. REPORT 정정(v3 기본 자리 60=과일별 15, 서버 실행설정 결과 반영, 사본 logs/REPORT_pre_w1fix_snapshot.md)
+[2026-11-26 05:54] mix3_stats.py(구성 통계·잡기 지표, v3 로 시험) · 학교 프롬프트 2: prompts/school_P2A_mix3A.md (A 10만 학습, 색 증강만 확인, HF 비공개 mgm136044/act_mix3)
+[2026-11-26 05:59] 단계 보고서 시작(사용자 요청): reports_w1/01_W0, 02_W2, 03_P1code + index.html(build_html.py). 이 셸에서 snap firefox 헤드리스 실행 불가(cgroup) → HTML 구조 검사로 확인(표 5·코드 6)
+[2026-11-26 06:06] 색 증강만 옵션 확인(draccus 파싱 시험): --dataset.image_transforms.tfs='<JSON 4개>' → tfs 4개. --augment 단독은 sharpness·affine 포함. prompts/color_aug_flags.txt
+[2026-11-26 06:07] 팀원 분담 제안: TM1 팀원 학교 세션 mix2 chunk50 10만(prompts/teammate_T1_mix2_chunk50.md), TM2 mix3 A chunk50, TM3 팀원 PC 로 mix3 B 절반 생성(사양 확인 필요), TM4 조교 질문. P2-A 프롬프트에 색 증강 옵션 직접 기재
+[2026-11-26 06:34] P0-c te 48: SCORE(서버형 장면 성공률 평균 ×100, distract 제외): 60.0 {"default": {"success": 0.875, "per_fruit": {"딸기": 0.5, "오렌지": 1.0, "레몬": 1.0, "바나나": 1.0}}, "count": {"success": 0.375, "per_fruit": {"딸기": 0.5, "오렌지": 0.5, "레몬": 0.0, "바나나": 0.5}}, "robot" 
+[2026-11-26 06:58] P0-c te 4개 16: SCORE(서버형 장면 성공률 평균 ×100, distract 제외): 12.5 {"count4": {"success": 0.125, "per_fruit": {"딸기": 0.0, "오렌지": 0.0, "레몬": 0.25, "바나나": 0.25}}} 
+[2026-11-26 07:16] P0-d 진단(te + 그리퍼 재매핑 1.5, 기본·같은 과일 16, 제출물 아님): SCORE(서버형 장면 성공률 평균 ×100, distract 제외): 43.8 {"default": {"success": 0.625, "per_fruit": {"딸기": 0.0, "오렌지": 1.0, "레몬": 1.0, "바나나": 0.5}}, "count": {"succes
+[2026-11-26 07:16] mix3 trial 시작: 딸기 10 · 오렌지 10 · 레몬 10 · 바나나 10, 시드 900~, 옵션 --vary-prob 0.9 --vary-use count=0.56,extra=0,robot=0.45 --allow-plain-vary --count3-prob 0.5 --count4-prob 0.3 --single-random-prob 0.5 --single-mid-prob 1.0 --light-prob 0.33 --dart-prob 0.3 --start-perturb-prob 0.3 --nearest-margin 0.025 --plate-prob 0.33 --plate-range 0.06 --far-prob 0.2 --far-min 0.30 --params params_mix3.json
+[2026-11-26 07:19] mix3 trial strawberry: SUMMARY {"Strawberry": {"attempts": 10, "saved": 0, "stats": {"놓침": 10}, "relayouts": 5}} 총 184s
+[2026-11-26 07:20] P0-c/P0-d 정리: 판정 재현(te 24/40 vs n100 12/40, 짝 16:4). 재매핑 7/16 < te 10/16 → 실행 시 깊게 닫기 기각. te −0.05 사본 준비(810b0258). 보고서 04
+[2026-11-26 07:22] mix3 trial 중단: 딸기 0/10, 오렌지 0/9(놓침 8·미끄러짐 1). v3 는 99%·93%. 잡기 값 분리 실험(abl)으로 전환
+[2026-11-26 07:26] abl V0 strawberry: SUMMARY {"Strawberry": {"attempts": 8, "saved": 7, "stats": {"성공": 7, "놓침": 1}, "relayouts": 2}} 총 220s 
+[2026-11-26 07:26] abl V0 strawberry: SUMMARY {"Strawberry": {"attempts": 8, "saved": 7, "stats": {"성공": 7, "놓침": 1}, "relayouts": 2}} 총 220s (V0 오렌지는 건너뜀, v3 기록 93%)
+[2026-11-26 07:29] abl V1_close strawberry: SUMMARY {"Strawberry": {"attempts": 8, "saved": 2, "stats": {"성공": 2, "놓침": 6}, "relayouts": 1}} 총 154s 
+[2026-11-26 07:32] abl V1_close orange: SUMMARY {"Orange": {"attempts": 8, "saved": 2, "stats": {"놓침": 6, "성공": 2}, "relayouts": 1}} 총 146s 
+[2026-11-26 07:36] abl V2_center strawberry: SUMMARY {"Strawberry": {"attempts": 8, "saved": 7, "stats": {"성공": 7, "미끄러짐": 1}, "relayouts": 1}} 총 232s 
+[2026-11-26 07:39] abl V2_center orange: SUMMARY {"Orange": {"attempts": 8, "saved": 5, "stats": {"놓침": 3, "성공": 5}, "relayouts": 6}} 총 189s 
+[2026-11-26 07:41] 분리 실험 결론: 깊게 닫기가 원인(V1 딸기 2/8·오렌지 2/8, 짜여 빠짐). V2(가운데 맞춤만) 딸기 7/8·오렌지 5/8(실패 2회는 먼 자리 도달 실패). params_mix3.json 2판 = V2. 레몬·바나나 V2 확인 시작
+[2026-11-26 07:45] abl V2_center lemon: SUMMARY {"Lemon": {"attempts": 8, "saved": 8, "stats": {"성공": 8}, "relayouts": 6}} 총 234s 
+[2026-11-26 07:49] abl V2_center banana: SUMMARY {"Banana": {"attempts": 8, "saved": 7, "stats": {"성공": 7, "놓침": 1}, "relayouts": 10}} 총 225s 
+[2026-11-26 07:49] mix3 A 시작: 딸기 165 · 오렌지 138 · 레몬 138 · 바나나 110, 시드 1000~, 옵션 --vary-prob 0.9 --vary-use count=0.56,extra=0,robot=0.45 --allow-plain-vary --count3-prob 0.5 --count4-prob 0.3 --single-random-prob 0.5 --single-mid-prob 1.0 --light-prob 0.33 --dart-prob 0.3 --start-perturb-prob 0.3 --nearest-margin 0.025 --plate-prob 0.33 --plate-range 0.06 --far-prob 0.2 --far-min 0.30 --params params_mix3.json
+[2026-11-26 07:50] mix3 A 중단(07:55, 1회 시도 뒤): 다시 뽑기 때 장면 종류·개수도 새로 뽑혀 여러 개 장면이 줄어드는 편향(분리 실험 40회: 여러 개 30%·4개 2%, 목표 45~55%·12~18%) → --keep-kind-on-relayout 추가 후 재시작
+[2026-11-26 07:51] mix3 A 시작: 딸기 165 · 오렌지 138 · 레몬 138 · 바나나 110, 시드 1000~, 옵션 --vary-prob 0.9 --vary-use count=0.56,extra=0,robot=0.45 --allow-plain-vary --count3-prob 0.5 --count4-prob 0.3 --single-random-prob 0.5 --single-mid-prob 1.0 --light-prob 0.33 --dart-prob 0.3 --start-perturb-prob 0.3 --nearest-margin 0.025 --plate-prob 0.33 --plate-range 0.06 --far-prob 0.2 --far-min 0.30 --params params_mix3.json --keep-kind-on-relayout
+[2026-11-26 08:10] A 딸기 30회 구성: 여러 개 57%·4개 20%(편향 해결), 성공 30/30, 쥐는 동안 이동 중앙 5.5mm. 보고서 05
+[2026-11-26 09:20] #27(같은 te zip 재제출) = 54.2 그대로 → 서버 장면 고정으로 판단. 제출 운영 규칙 갱신, 보고서 06
+[2026-11-26 09:27] 91점 대응 지시(09:25) 수신: B 자동 생성 취소(run_after_A.sh 중지 → run_after_A2.sh 는 te −0.05 선별만). GPU 는 P0 실패 분석·DAgger 에
+[2026-11-26 09:37] mix3 A strawberry: SUMMARY {"Strawberry": {"attempts": 170, "saved": 165, "stats": {"성공": 165, "놓침": 2}, "relayouts": 319}} 총 6336s
+[2026-11-26 09:44] Fable 검토 반영: A 뒤 te −0.05 대신 P0 단독 스윕 72회(run_after_A3.sh). te −0.05 는 DAgger 모델에서 비교
+[2026-11-26 09:48] Fable 검토 합친 계획 확정(보고서 07). 연결: A→finish_A(CPU)·스윕 72(GPU)→DAgger 시험 16→R1a
+[2026-11-26 09:49] 사용자 결정: 로컬 GPU 일(11-29) 18시까지 과일 전용
+[2026-11-26 09:53] 친구 1 세션: mix2 chunk50 10만 학습 시작(사용자 확인)

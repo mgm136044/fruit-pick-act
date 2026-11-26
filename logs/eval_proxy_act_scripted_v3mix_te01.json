@@ -1,0 +1,359 @@
+{
+ "checkpoint": "train_runs/act_scripted_v3mix/outputs/act_scripted_v3mix/checkpoints/last/pretrained_model",
+ "n_action_steps": 1,
+ "temporal_ensemble": 0.01,
+ "scenes": {
+  "default": {
+   "success": 0.25,
+   "per_fruit": {
+    "딸기": 0.0,
+    "오렌지": 0.0,
+    "레몬": 1.0,
+    "바나나": 0.0
+   }
+  },
+  "count": {
+   "success": 0.25,
+   "per_fruit": {
+    "딸기": 0.0,
+    "오렌지": 0.0,
+    "레몬": 0.5,
+    "바나나": 0.5
+   }
+  }
+ },
+ "score_mean_of_scenes_x100": 25.0,
+ "score_note": "distract 제외 (서버에 없음)",
+ "why": {
+  "못 들어올림(잡기 실패)": 8,
+  "성공": 4,
+  "들었지만 접시 밖": 4
+ },
+ "episodes": [
+  {
+   "scene": "default",
+   "kinds": [
+    "default"
+   ],
+   "fruit": "Strawberry",
+   "success": false,
+   "steps": 900,
+   "count": 1,
+   "extra": {},
+   "robot": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "light": null,
+   "max_lift_cm": 0.0,
+   "plate_dist_cm": 27.8,
+   "why": "못 들어올림(잡기 실패)",
+   "gif": "report_html/assets/policy_act_scripted_v3mix_te01/default_00_strawberry_fail.gif"
+  },
+  {
+   "scene": "default",
+   "kinds": [
+    "default"
+   ],
+   "fruit": "Orange",
+   "success": false,
+   "steps": 900,
+   "count": 1,
+   "extra": {},
+   "robot": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "light": null,
+   "max_lift_cm": 0.3,
+   "plate_dist_cm": 30.7,
+   "why": "못 들어올림(잡기 실패)",
+   "gif": "report_html/assets/policy_act_scripted_v3mix_te01/default_01_orange_fail.gif"
+  },
+  {
+   "scene": "default",
+   "kinds": [
+    "default"
+   ],
+   "fruit": "Lemon",
+   "success": true,
+   "steps": 181,
+   "count": 1,
+   "extra": {},
+   "robot": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "light": null,
+   "max_lift_cm": 10.6,
+   "plate_dist_cm": 7.6,
+   "why": "성공"
+  },
+  {
+   "scene": "default",
+   "kinds": [
+    "default"
+   ],
+   "fruit": "Banana",
+   "success": false,
+   "steps": 900,
+   "count": 1,
+   "extra": {},
+   "robot": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "light": null,
+   "max_lift_cm": 9.1,
+   "plate_dist_cm": 24.4,
+   "why": "들었지만 접시 밖"
+  },
+  {
+   "scene": "default",
+   "kinds": [
+    "default"
+   ],
+   "fruit": "Strawberry",
+   "success": false,
+   "steps": 900,
+   "count": 1,
+   "extra": {},
+   "robot": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "light": null,
+   "max_lift_cm": 0.2,
+   "plate_dist_cm": 28.5,
+   "why": "못 들어올림(잡기 실패)"
+  },
+  {
+   "scene": "default",
+   "kinds": [
+    "default"
+   ],
+   "fruit": "Orange",
+   "success": false,
+   "steps": 900,
+   "count": 1,
+   "extra": {},
+   "robot": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "light": null,
+   "max_lift_cm": 0.7,
+   "plate_dist_cm": 28.5,
+   "why": "못 들어올림(잡기 실패)"
+  },
+  {
+   "scene": "default",
+   "kinds": [
+    "default"
+   ],
+   "fruit": "Lemon",
+   "success": true,
+   "steps": 191,
+   "count": 1,
+   "extra": {},
+   "robot": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "light": null,
+   "max_lift_cm": 10.0,
+   "plate_dist_cm": 4.1,
+   "why": "성공"
+  },
+  {
+   "scene": "default",
+   "kinds": [
+    "default"
+   ],
+   "fruit": "Banana",
+   "success": false,
+   "steps": 900,
+   "count": 1,
+   "extra": {},
+   "robot": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "light": null,
+   "max_lift_cm": 5.3,
+   "plate_dist_cm": 19.7,
+   "why": "들었지만 접시 밖"
+  },
+  {
+   "scene": "count",
+   "kinds": [
+    "count"
+   ],
+   "fruit": "Strawberry",
+   "success": false,
+   "steps": 900,
+   "count": 2,
+   "extra": {},
+   "robot": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "light": null,
+   "max_lift_cm": 2.0,
+   "plate_dist_cm": 31.9,
+   "why": "들었지만 접시 밖",
+   "gif": "report_html/assets/policy_act_scripted_v3mix_te01/count_00_strawberry_fail.gif"
+  },
+  {
+   "scene": "count",
+   "kinds": [
+    "count"
+   ],
+   "fruit": "Orange",
+   "success": false,
+   "steps": 900,
+   "count": 3,
+   "extra": {},
+   "robot": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "light": null,
+   "max_lift_cm": 0.4,
+   "plate_dist_cm": 20.9,
+   "why": "못 들어올림(잡기 실패)",
+   "gif": "report_html/assets/policy_act_scripted_v3mix_te01/count_01_orange_fail.gif"
+  },
+  {
+   "scene": "count",
+   "kinds": [
+    "count"
+   ],
+   "fruit": "Lemon",
+   "success": false,
+   "steps": 900,
+   "count": 2,
+   "extra": {},
+   "robot": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "light": null,
+   "max_lift_cm": 1.5,
+   "plate_dist_cm": 16.7,
+   "why": "못 들어올림(잡기 실패)"
+  },
+  {
+   "scene": "count",
+   "kinds": [
+    "count"
+   ],
+   "fruit": "Banana",
+   "success": true,
+   "steps": 188,
+   "count": 2,
+   "extra": {},
+   "robot": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "light": null,
+   "max_lift_cm": 11.8,
+   "plate_dist_cm": 3.3,
+   "why": "성공"
+  },
+  {
+   "scene": "count",
+   "kinds": [
+    "count"
+   ],
+   "fruit": "Strawberry",
+   "success": false,
+   "steps": 900,
+   "count": 2,
+   "extra": {},
+   "robot": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "light": null,
+   "max_lift_cm": 0.2,
+   "plate_dist_cm": 28.4,
+   "why": "못 들어올림(잡기 실패)"
+  },
+  {
+   "scene": "count",
+   "kinds": [
+    "count"
+   ],
+   "fruit": "Orange",
+   "success": false,
+   "steps": 900,
+   "count": 2,
+   "extra": {},
+   "robot": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "light": null,
+   "max_lift_cm": 0.8,
+   "plate_dist_cm": 26.4,
+   "why": "못 들어올림(잡기 실패)"
+  },
+  {
+   "scene": "count",
+   "kinds": [
+    "count"
+   ],
+   "fruit": "Lemon",
+   "success": true,
+   "steps": 208,
+   "count": 3,
+   "extra": {},
+   "robot": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "light": null,
+   "max_lift_cm": 10.3,
+   "plate_dist_cm": 3.1,
+   "why": "성공"
+  },
+  {
+   "scene": "count",
+   "kinds": [
+    "count"
+   ],
+   "fruit": "Banana",
+   "success": false,
+   "steps": 900,
+   "count": 2,
+   "extra": {},
+   "robot": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "light": null,
+   "max_lift_cm": 3.7,
+   "plate_dist_cm": 22.9,
+   "why": "들었지만 접시 밖"
+  }
+ ],
+ "wall_s": 1284
+}
