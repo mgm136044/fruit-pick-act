@@ -483,7 +483,7 @@ def main():
             xy0 = {n: pos_w(n)[:2].copy() for n in tgt}
             Tb0 = base_T()
             gif_pol = collections.deque(maxlen=12)  # GIF 용 넘겨받기 전 정책 프레임 (4스텝마다)
-            closes, prev_closed = [], False
+            closes, prev_closed = [], True  # 휴식 자세는 그리퍼가 닫혀 있음(모터 0) → 한 번 연 뒤 닫힐 때부터 쥐기로 셈
             lifted_max = 0.0
             lift_copy = {n: 0.0 for n in tgt}  # 사본별 최고 들림 (떨어뜨린 사본 찾기)
             miss_run, still_run = 0, 0

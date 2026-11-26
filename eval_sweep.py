@@ -64,6 +64,9 @@ AREA_X, AREA_Y = (1.95, 2.30), (-0.48, -0.26)  # eval_proxy / 생성기와 같�
 PLATE_CLEAR, ROBOT_CLEAR, GAP, GAP_BANANA = 0.14, 0.17, 0.075, 0.11
 # 과일별 '닫힘' 판정: 접촉 명령값(간섭 표로 계산, 보고서 05) + 2. 정책 그리퍼 명령이 이 아래로 내려가면 쥐기
 CONTACT_CMD = {"Strawberry": 26.6, "Orange": 36.9, "Lemon": 29.6, "Banana": 18.2}
+# 분류용 잡는 점·TCP (생성기·params_mix3 와 같은 값): (grasp_local, 폭, fixed_clear). 바나나 잡는 점은 몸체 원점에서 약 3.6cm 떨어져 있다
+GRASP = {"Strawberry": ([0, 0, 0.0228], 0.042, 0.011), "Orange": ([0, 0, 0.0268], 0.055, 0.008),
+         "Lemon": ([0, 0, 0.0225], 0.046, 0.011), "Banana": ([-0.0303, -0.020, 0.0160], 0.032, 0.011)}
 
 
 def parse_conds(s):
@@ -153,6 +156,11 @@ def main():
 
         def pos(name):  # 환경 원점 기준 위치
             return env.scene[name].data.root_pos_w.torch[0].cpu().numpy().astype(np.float64) - org
+
+        def gpos(name, fruit):  # 환경 원점 기준 잡는 점 (과일 자세 반영)
+            p7 = env.scene[name].data.root_link_pose_w.torch[0].cpu().numpy().astype(np.float64)
+            R = quat_wxyz_to_mat([p7[6], p7[3], p7[4], p7[5]])
+            return R @ np.array(GRASP[fruit][0]) + p7[:3] - org
 
         def tcp_now():  # 환경 원점 기준 손끝 위치 (기구학 FK, 생성기와 같은 체인)
             p7 = robot.data.root_link_pose_w.torch[0].cpu().numpy().astype(np.float64)
@@ -266,7 +274,8 @@ def main():
                 table_z = min(z0[n] for n in tgt) if tgt else 0.0
                 lift = {n: 0.0 for n in tgt + oth}
                 thr = CONTACT_CMD[fruit] + 2.0
-                closes, prev_closed = [], False
+                kin.tcp = np.array([-0.0105 + GRASP[fruit][2] + GRASP[fruit][1] / 2, 0.0, -0.085])  # 생성기 set_tcp 와 같음
+                closes, prev_closed = [], True  # 휴식 자세는 그리퍼가 닫혀 있음(모터 0) → 한 번 연 뒤 닫힐 때부터 쥐기로 셈
                 tcp_path, empty_to_plate = [], False
                 xy0 = {n: pos(n)[:2] for n in tgt}
                 push_before_close = 0.0  # 첫 쥐기 전 목표 사본의 최대 수평 밀림
@@ -295,7 +304,7 @@ def main():
                     q_prev = q_cur
                     closed = float(a[5]) < thr
                     if closed and not prev_closed:  # 쥐기 시작
-                        dxy = min(math.hypot(tc[0] - pos(n)[0], tc[1] - pos(n)[1]) for n in tgt) if tgt else 9.9
+                        dxy = min(math.hypot(tc[0] - gpos(n, fruit)[0], tc[1] - gpos(n, fruit)[1]) for n in tgt) if tgt else 9.9
                         closes.append({"t": t, "dxy_cm": round(dxy * 100, 1), "tcp_h_cm": round((tc[2] - table_z) * 100, 1)})
                     prev_closed = closed
                     for n in tgt + oth:

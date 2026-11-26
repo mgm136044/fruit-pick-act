@@ -148,3 +148,9 @@
 [2026-11-26 09:53] 친구 1 세션: mix2 chunk50 10만 학습 시작(사용자 확인)
 [2026-11-26 10:10] 팀 공유용 로컬 git 저장소 준비(~/fruit_datagen, 코드·문서·작은 기록만 3.9MB, 비공개 원격 대기: GitHub 인증 필요)
 [2026-11-26 10:15] GitHub 공개 저장소 https://github.com/mgm136044/fruit-pick-act 에 첫 커밋(dec0a73) 올림 (사용자 요청: 공개)
+[2026-11-26 10:21] 과제5(로봇제어 #5) 시뮬 데이터 생성을 A 직후에 끼움(사용자 승인). run_after_A3.sh 일시정지 → 과제5 끝나면 자동 재개. 로그 ~/hw5_sim/logs/window1.log
+[2026-11-26 10:23] 과제5 창 1 끝 → run_after_A3.sh(P0 스윕) 재개
+[2026-11-26 10:23] 과제5(로봇제어 #5) 시뮬 데이터 생성을 A 직후에 끼움(사용자 승인). run_after_A3.sh 일시정지 → 과제5 끝나면 자동 재개. 로그 ~/hw5_sim/logs/window1.log
+[2026-11-26 11:07] mix3 A orange: SUMMARY {"Orange": {"attempts": 158, "saved": 138, "stats": {"성공": 138, "놓침": 12}, "relayouts": 362}} 총 5417s
+[2026-11-26 12:36] mix3 A lemon: SUMMARY {"Lemon": {"attempts": 147, "saved": 138, "stats": {"성공": 138, "놓침": 2}, "relayouts": 336}} 총 5327s
+[2026-11-26 13:26] 실행 전 정독 수정: eval_sweep·dagger_collect 의 닫힘 판정 시작값 False→True (휴식 자세 그리퍼 모터 0 = 닫힘이라 t=0 을 쥐기로 세던 문제: T1·이른 넘겨받기 꺼짐, 시작 상승에서 T2 오발, 스윕 '닫기 전 밀어냄'·'멈춤' 분류 꺼짐·성공마다 다시 잡기로 셈). eval_sweep 빗나감 거리를 과일별 잡는 점·TCP 기준으로(바나나 원점-잡는 점 3.6cm). 사본 logs/*_pre_restclose_snapshot.py. 휴식 손끝 z 1.00m > T1_miss 기준 0.97m 확인
