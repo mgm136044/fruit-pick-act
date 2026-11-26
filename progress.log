@@ -191,3 +191,8 @@
 11-26 19:00 HF 업로드 시작(나): fruit_mix3_train ← fruit_mix3_A_R1a.zip + README_R1a.md
 11-26 19:04 R1a 다시 묶기(jump 9개 뺌, 802ep·217422프레임, sha 02fbb45e…) HF 업로드 완료(README_R1a.md, A README 그대로). chain_resume.sh 시험 통과 → tools/ 업로드
 [2026-11-26 19:20] 평가 대기열 시작 · 2026-11-27 12:00 까지 · 이미 한 것 []
+[2026-11-26 19:59] 평가 대기열 시작 · 2026-11-27 12:00 까지 · 이미 한 것 []
+11-26 19:59 P0-a 20만 zip HF 에 올라옴(19:50) → 평가 대기열 순서 바꿔 다시 띄움(20만 te 먼저, 15만 맨 뒤)
+[2026-11-26 20:12] P0 스윕 나머지: SWEEP 평균(distract 제외) ×100: 23.2 최저 조건: ('yaw180', 0.125) {"yaw45": 0.625, "yaw180": 0.125, "rob5": 0.25, "rob10": 0.25, "plate6": 0.125, "cnt23": 0.125, "cnt4": 0.125} 
+[2026-11-26 20:13] act_mix2_200k_color_te: 받음 mgm136044/act_mix2_200k_color/submission_act_mix2_200k_color_te.zip sha 166609393a4e7f72… (README sha 일치) config {'chunk_size': 100, 'n_action_steps': 1, 'temporal_ensemble_coeff': 0.01} → 평가 시작(56)
+11-26 20:15 P0 스윕 72회 완료 21/72(29%), R1a 조건별과 불일치(접시 17/22 vs 1/8, 원인 미확정) · 보고서 09

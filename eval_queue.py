@@ -26,13 +26,13 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 os.chdir(HERE)
 BASE = ("logs/eval_proxy_act_mix2_100k_color_te01.json", "logs/eval_proxy_act_mix2_100k_color_c4te01.json")  # 서버 54.2 모델(te0.01)
 CANDS = [  # (이름, 저장소, zip) — 위에서부터 우선
-    ("act_mix2_150k_color_te", "mgm136044/act_mix2_200k_color", "submission_act_mix2_150k_color_te.zip"),
+    ("act_mix2_200k_color_te", "mgm136044/act_mix2_200k_color", "submission_act_mix2_200k_color_te.zip"),
     ("act_mix3A_100k_te", "mgm136044/act_mix3", "submission_act_mix3A_100k_te.zip"),
     ("act_mix3A_R1a_170k_te", "mgm136044/act_mix3", "submission_act_mix3A_R1a_170k_te.zip"),
     ("act_mix2_c50_100k_te", "mgm136044/act_mix2_c50", "submission_act_mix2_c50_100k_te.zip"),
-    ("act_mix2_200k_color_te", "mgm136044/act_mix2_200k_color", "submission_act_mix2_200k_color_te.zip"),
     ("act_mix3A_c50_100k_te", "mgm136044/act_mix3", "submission_act_mix3A_c50_100k_te.zip"),
     ("act_mix3A_c50_R1a_170k_te", "mgm136044/act_mix3", "submission_act_mix3A_c50_R1a_170k_te.zip"),
+    ("act_mix2_150k_color_te", "mgm136044/act_mix2_200k_color", "submission_act_mix2_150k_color_te.zip"),
 ]
 GPU_JOBS = re.compile(r"eval_sweep\.py|eval_proxy\.py|dagger_collect\.py|gen_scripted\.py|run_policy\.py")  # + nvidia-smi 계산 프로세스
 

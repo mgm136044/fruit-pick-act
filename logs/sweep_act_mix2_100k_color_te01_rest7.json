@@ -1,0 +1,2589 @@
+{
+ "checkpoint": "te_models/act_mix2_100k_color_te",
+ "n_action_steps": 1,
+ "temporal_ensemble": 0.01,
+ "seed": 7,
+ "conds": [
+  {
+   "name": "yaw45",
+   "yaw": "45"
+  },
+  {
+   "name": "yaw180",
+   "yaw": "180"
+  },
+  {
+   "name": "rob5",
+   "rob": "5/15"
+  },
+  {
+   "name": "rob10",
+   "rob": "10/30"
+  },
+  {
+   "name": "plate6",
+   "plate": "0.06"
+  },
+  {
+   "name": "cnt23",
+   "count": "2-3"
+  },
+  {
+   "name": "cnt4",
+   "count": "4"
+  }
+ ],
+ "summary": {
+  "yaw45": {
+   "n": 8,
+   "success": 0.625,
+   "per_fruit": {
+    "딸기": "1/2",
+    "오렌지": "2/2",
+    "레몬": "2/2",
+    "바나나": "0/2"
+   },
+   "why": {
+    "접근 빗나감(30mm 초과)": 1,
+    "성공": 5,
+    "들고 가다 떨어뜨림": 1,
+    "접근 빗나감(12~30mm)": 1
+   },
+   "retry_success": 0,
+   "empty_to_plate": 0
+  },
+  "yaw180": {
+   "n": 8,
+   "success": 0.125,
+   "per_fruit": {
+    "딸기": "0/2",
+    "오렌지": "1/2",
+    "레몬": "0/2",
+    "바나나": "0/2"
+   },
+   "why": {
+    "접근 빗나감(12~30mm)": 3,
+    "성공": 1,
+    "접근 빗나감(30mm 초과)": 2,
+    "잡기 실패": 1,
+    "들고 가다 떨어뜨림": 1
+   },
+   "retry_success": 0,
+   "empty_to_plate": 5
+  },
+  "rob5": {
+   "n": 8,
+   "success": 0.25,
+   "per_fruit": {
+    "딸기": "0/2",
+    "오렌지": "2/2",
+    "레몬": "0/2",
+    "바나나": "0/2"
+   },
+   "why": {
+    "접근 빗나감(30mm 초과)": 3,
+    "성공": 2,
+    "접근 빗나감(12~30mm)": 3
+   },
+   "retry_success": 0,
+   "empty_to_plate": 6
+  },
+  "rob10": {
+   "n": 8,
+   "success": 0.25,
+   "per_fruit": {
+    "딸기": "0/2",
+    "오렌지": "0/2",
+    "레몬": "1/2",
+    "바나나": "1/2"
+   },
+   "why": {
+    "접근 빗나감(30mm 초과)": 4,
+    "성공": 2,
+    "접근 빗나감(12~30mm)": 1,
+    "잡기 실패": 1
+   },
+   "retry_success": 0,
+   "empty_to_plate": 6
+  },
+  "plate6": {
+   "n": 8,
+   "success": 0.125,
+   "per_fruit": {
+    "딸기": "0/2",
+    "오렌지": "1/2",
+    "레몬": "0/2",
+    "바나나": "0/2"
+   },
+   "why": {
+    "들고 가다 떨어뜨림": 2,
+    "잡기 실패": 2,
+    "접근 빗나감(30mm 초과)": 3,
+    "성공": 1
+   },
+   "retry_success": 0,
+   "empty_to_plate": 5
+  },
+  "cnt23": {
+   "n": 8,
+   "success": 0.125,
+   "per_fruit": {
+    "딸기": "0/2",
+    "오렌지": "0/2",
+    "레몬": "1/2",
+    "바나나": "0/2"
+   },
+   "why": {
+    "접근 빗나감(12~30mm)": 3,
+    "들고 가다 떨어뜨림": 3,
+    "잡기 실패": 1,
+    "성공": 1
+   },
+   "retry_success": 0,
+   "empty_to_plate": 4
+  },
+  "cnt4": {
+   "n": 8,
+   "success": 0.125,
+   "per_fruit": {
+    "딸기": "0/2",
+    "오렌지": "0/2",
+    "레몬": "0/2",
+    "바나나": "1/2"
+   },
+   "why": {
+    "접근 빗나감(12~30mm)": 6,
+    "접근 빗나감(30mm 초과)": 1,
+    "성공": 1
+   },
+   "retry_success": 1,
+   "empty_to_plate": 7
+  }
+ },
+ "mean_success_x100": 23.2,
+ "min_cond": [
+  "yaw180",
+  0.125
+ ],
+ "episodes": [
+  {
+   "cond": "yaw45",
+   "fruit": "Strawberry",
+   "ep": 0,
+   "success": false,
+   "steps": 900,
+   "why": "접근 빗나감(30mm 초과)",
+   "n_closes": 2,
+   "closes": [
+    {
+     "t": 114,
+     "dxy_cm": 3.1,
+     "tcp_h_cm": 6.4
+    },
+    {
+     "t": 241,
+     "dxy_cm": 5.3,
+     "tcp_h_cm": 6.2
+    }
+   ],
+   "max_lift_cm": 0.2,
+   "plate_dist_cm": 26.4,
+   "empty_to_plate": false,
+   "move_last20s_cm": 21.3,
+   "push_before_close_mm": 0.6,
+   "still_max_steps": 13,
+   "tipped": false,
+   "robot": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "count": 1,
+   "fruit_d_cm": [
+    -0.3,
+    -0.3
+   ],
+   "yaw_deg": -20.9,
+   "light": null,
+   "gif": "report_html/assets/sweep_mix2_te01/yaw45_00_strawberry_접근빗나감(30mm초과).gif"
+  },
+  {
+   "cond": "yaw45",
+   "fruit": "Orange",
+   "ep": 1,
+   "success": true,
+   "steps": 192,
+   "why": "성공",
+   "n_closes": 1,
+   "closes": [
+    {
+     "t": 114,
+     "dxy_cm": 0.7,
+     "tcp_h_cm": 2.5
+    }
+   ],
+   "max_lift_cm": 11.0,
+   "plate_dist_cm": 1.6,
+   "empty_to_plate": false,
+   "move_last20s_cm": 50.2,
+   "push_before_close_mm": 0.0,
+   "still_max_steps": 14,
+   "tipped": false,
+   "robot": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "count": 1,
+   "fruit_d_cm": [
+    2.9,
+    0.4
+   ],
+   "yaw_deg": -11.9,
+   "light": null,
+   "gif": "report_html/assets/sweep_mix2_te01/yaw45_01_orange_ok.gif"
+  },
+  {
+   "cond": "yaw45",
+   "fruit": "Lemon",
+   "ep": 2,
+   "success": true,
+   "steps": 183,
+   "why": "성공",
+   "n_closes": 1,
+   "closes": [
+    {
+     "t": 106,
+     "dxy_cm": 0.9,
+     "tcp_h_cm": 2.4
+    }
+   ],
+   "max_lift_cm": 11.0,
+   "plate_dist_cm": 0.9,
+   "empty_to_plate": false,
+   "move_last20s_cm": 55.0,
+   "push_before_close_mm": 0.1,
+   "still_max_steps": 13,
+   "tipped": false,
+   "robot": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "count": 1,
+   "fruit_d_cm": [
+    1.8,
+    1.1
+   ],
+   "yaw_deg": 4.1,
+   "light": null
+  },
+  {
+   "cond": "yaw45",
+   "fruit": "Banana",
+   "ep": 3,
+   "success": false,
+   "steps": 900,
+   "why": "들고 가다 떨어뜨림",
+   "n_closes": 6,
+   "closes": [
+    {
+     "t": 121,
+     "dxy_cm": 2.1,
+     "tcp_h_cm": 4.9
+    },
+    {
+     "t": 280,
+     "dxy_cm": 7.1,
+     "tcp_h_cm": 5.9
+    },
+    {
+     "t": 460,
+     "dxy_cm": 5.4,
+     "tcp_h_cm": 11.8
+    },
+    {
+     "t": 523,
+     "dxy_cm": 7.3,
+     "tcp_h_cm": 4.3
+    },
+    {
+     "t": 698,
+     "dxy_cm": 4.2,
+     "tcp_h_cm": 13.5
+    },
+    {
+     "t": 782,
+     "dxy_cm": 6.9,
+     "tcp_h_cm": 4.4
+    }
+   ],
+   "max_lift_cm": 3.1,
+   "plate_dist_cm": 15.4,
+   "empty_to_plate": false,
+   "move_last20s_cm": 90.4,
+   "push_before_close_mm": 0.5,
+   "still_max_steps": 11,
+   "tipped": false,
+   "robot": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "count": 1,
+   "fruit_d_cm": [
+    -2.1,
+    2.0
+   ],
+   "yaw_deg": 34.8,
+   "light": null,
+   "gif": "report_html/assets/sweep_mix2_te01/yaw45_03_banana_들고가다떨어뜨림.gif"
+  },
+  {
+   "cond": "yaw45",
+   "fruit": "Strawberry",
+   "ep": 4,
+   "success": true,
+   "steps": 201,
+   "why": "성공",
+   "n_closes": 1,
+   "closes": [
+    {
+     "t": 118,
+     "dxy_cm": 1.5,
+     "tcp_h_cm": 2.6
+    }
+   ],
+   "max_lift_cm": 11.2,
+   "plate_dist_cm": 1.1,
+   "empty_to_plate": false,
+   "move_last20s_cm": 69.6,
+   "push_before_close_mm": 0.0,
+   "still_max_steps": 13,
+   "tipped": true,
+   "robot": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "count": 1,
+   "fruit_d_cm": [
+    -2.6,
+    -1.4
+   ],
+   "yaw_deg": 20.7,
+   "light": null
+  },
+  {
+   "cond": "yaw45",
+   "fruit": "Orange",
+   "ep": 5,
+   "success": true,
+   "steps": 201,
+   "why": "성공",
+   "n_closes": 1,
+   "closes": [
+    {
+     "t": 126,
+     "dxy_cm": 0.8,
+     "tcp_h_cm": 2.6
+    }
+   ],
+   "max_lift_cm": 11.1,
+   "plate_dist_cm": 3.3,
+   "empty_to_plate": false,
+   "move_last20s_cm": 47.3,
+   "push_before_close_mm": 0.1,
+   "still_max_steps": 17,
+   "tipped": false,
+   "robot": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "count": 1,
+   "fruit_d_cm": [
+    2.3,
+    0.7
+   ],
+   "yaw_deg": 23.3,
+   "light": null
+  },
+  {
+   "cond": "yaw45",
+   "fruit": "Lemon",
+   "ep": 6,
+   "success": true,
+   "steps": 194,
+   "why": "성공",
+   "n_closes": 1,
+   "closes": [
+    {
+     "t": 118,
+     "dxy_cm": 1.1,
+     "tcp_h_cm": 2.4
+    }
+   ],
+   "max_lift_cm": 10.9,
+   "plate_dist_cm": 3.8,
+   "empty_to_plate": false,
+   "move_last20s_cm": 50.8,
+   "push_before_close_mm": 0.1,
+   "still_max_steps": 13,
+   "tipped": false,
+   "robot": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "count": 1,
+   "fruit_d_cm": [
+    0.3,
+    -2.1
+   ],
+   "yaw_deg": -23.6,
+   "light": null
+  },
+  {
+   "cond": "yaw45",
+   "fruit": "Banana",
+   "ep": 7,
+   "success": false,
+   "steps": 900,
+   "why": "접근 빗나감(12~30mm)",
+   "n_closes": 3,
+   "closes": [
+    {
+     "t": 122,
+     "dxy_cm": 2.5,
+     "tcp_h_cm": 5.1
+    },
+    {
+     "t": 283,
+     "dxy_cm": 11.1,
+     "tcp_h_cm": 5.7
+    },
+    {
+     "t": 465,
+     "dxy_cm": 14.3,
+     "tcp_h_cm": 3.9
+    }
+   ],
+   "max_lift_cm": 0.9,
+   "plate_dist_cm": 19.5,
+   "empty_to_plate": false,
+   "move_last20s_cm": 50.8,
+   "push_before_close_mm": 0.1,
+   "still_max_steps": 14,
+   "tipped": false,
+   "robot": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "count": 1,
+   "fruit_d_cm": [
+    -0.8,
+    -2.7
+   ],
+   "yaw_deg": 29.9,
+   "light": null,
+   "gif": "report_html/assets/sweep_mix2_te01/yaw45_07_banana_접근빗나감(12~30mm).gif"
+  },
+  {
+   "cond": "yaw180",
+   "fruit": "Strawberry",
+   "ep": 0,
+   "success": false,
+   "steps": 900,
+   "why": "접근 빗나감(12~30mm)",
+   "n_closes": 1,
+   "closes": [
+    {
+     "t": 117,
+     "dxy_cm": 3.0,
+     "tcp_h_cm": 6.0
+    }
+   ],
+   "max_lift_cm": 0.1,
+   "plate_dist_cm": 27.4,
+   "empty_to_plate": false,
+   "move_last20s_cm": 18.6,
+   "push_before_close_mm": 0.6,
+   "still_max_steps": 15,
+   "tipped": false,
+   "robot": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "count": 1,
+   "fruit_d_cm": [
+    1.6,
+    1.7
+   ],
+   "yaw_deg": -70.2,
+   "light": null,
+   "gif": "report_html/assets/sweep_mix2_te01/yaw180_00_strawberry_접근빗나감(12~30mm).gif"
+  },
+  {
+   "cond": "yaw180",
+   "fruit": "Orange",
+   "ep": 1,
+   "success": true,
+   "steps": 184,
+   "why": "성공",
+   "n_closes": 1,
+   "closes": [
+    {
+     "t": 112,
+     "dxy_cm": 1.0,
+     "tcp_h_cm": 2.7
+    }
+   ],
+   "max_lift_cm": 10.3,
+   "plate_dist_cm": 4.3,
+   "empty_to_plate": false,
+   "move_last20s_cm": 52.5,
+   "push_before_close_mm": 0.1,
+   "still_max_steps": 11,
+   "tipped": true,
+   "robot": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "count": 1,
+   "fruit_d_cm": [
+    -0.4,
+    1.1
+   ],
+   "yaw_deg": 40.2,
+   "light": null,
+   "gif": "report_html/assets/sweep_mix2_te01/yaw180_01_orange_ok.gif"
+  },
+  {
+   "cond": "yaw180",
+   "fruit": "Lemon",
+   "ep": 2,
+   "success": false,
+   "steps": 900,
+   "why": "접근 빗나감(12~30mm)",
+   "n_closes": 3,
+   "closes": [
+    {
+     "t": 113,
+     "dxy_cm": 1.3,
+     "tcp_h_cm": 4.6
+    },
+    {
+     "t": 243,
+     "dxy_cm": 9.2,
+     "tcp_h_cm": 6.3
+    },
+    {
+     "t": 837,
+     "dxy_cm": 15.5,
+     "tcp_h_cm": 5.2
+    }
+   ],
+   "max_lift_cm": 0.9,
+   "plate_dist_cm": 25.8,
+   "empty_to_plate": true,
+   "move_last20s_cm": 74.0,
+   "push_before_close_mm": 2.0,
+   "still_max_steps": 13,
+   "tipped": false,
+   "robot": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "count": 1,
+   "fruit_d_cm": [
+    -2.6,
+    0.9
+   ],
+   "yaw_deg": -132.7,
+   "light": null,
+   "gif": "report_html/assets/sweep_mix2_te01/yaw180_02_lemon_접근빗나감(12~30mm).gif"
+  },
+  {
+   "cond": "yaw180",
+   "fruit": "Banana",
+   "ep": 3,
+   "success": false,
+   "steps": 900,
+   "why": "접근 빗나감(30mm 초과)",
+   "n_closes": 2,
+   "closes": [
+    {
+     "t": 120,
+     "dxy_cm": 6.2,
+     "tcp_h_cm": 5.4
+    },
+    {
+     "t": 263,
+     "dxy_cm": 10.5,
+     "tcp_h_cm": 13.4
+    }
+   ],
+   "max_lift_cm": 0.0,
+   "plate_dist_cm": 18.0,
+   "empty_to_plate": true,
+   "move_last20s_cm": 35.3,
+   "push_before_close_mm": 0.0,
+   "still_max_steps": 13,
+   "tipped": false,
+   "robot": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "count": 1,
+   "fruit_d_cm": [
+    0.1,
+    0.6
+   ],
+   "yaw_deg": 177.8,
+   "light": null,
+   "gif": "report_html/assets/sweep_mix2_te01/yaw180_03_banana_접근빗나감(30mm초과).gif"
+  },
+  {
+   "cond": "yaw180",
+   "fruit": "Strawberry",
+   "ep": 4,
+   "success": false,
+   "steps": 900,
+   "why": "접근 빗나감(30mm 초과)",
+   "n_closes": 3,
+   "closes": [
+    {
+     "t": 115,
+     "dxy_cm": 6.6,
+     "tcp_h_cm": 2.4
+    },
+    {
+     "t": 406,
+     "dxy_cm": 28.1,
+     "tcp_h_cm": 11.2
+    },
+    {
+     "t": 856,
+     "dxy_cm": 27.1,
+     "tcp_h_cm": 10.6
+    }
+   ],
+   "max_lift_cm": 0.0,
+   "plate_dist_cm": 29.2,
+   "empty_to_plate": true,
+   "move_last20s_cm": 117.1,
+   "push_before_close_mm": 0.0,
+   "still_max_steps": 10,
+   "tipped": false,
+   "robot": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "count": 1,
+   "fruit_d_cm": [
+    -0.9,
+    0.8
+   ],
+   "yaw_deg": 96.6,
+   "light": null,
+   "gif": "report_html/assets/sweep_mix2_te01/yaw180_04_strawberry_접근빗나감(30mm초과).gif"
+  },
+  {
+   "cond": "yaw180",
+   "fruit": "Orange",
+   "ep": 5,
+   "success": false,
+   "steps": 900,
+   "why": "잡기 실패",
+   "n_closes": 1,
+   "closes": [
+    {
+     "t": 112,
+     "dxy_cm": 0.3,
+     "tcp_h_cm": 3.2
+    }
+   ],
+   "max_lift_cm": 1.1,
+   "plate_dist_cm": 27.0,
+   "empty_to_plate": true,
+   "move_last20s_cm": 77.7,
+   "push_before_close_mm": 0.1,
+   "still_max_steps": 12,
+   "tipped": true,
+   "robot": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "count": 1,
+   "fruit_d_cm": [
+    -1.5,
+    2.8
+   ],
+   "yaw_deg": 64.9,
+   "light": null,
+   "gif": "report_html/assets/sweep_mix2_te01/yaw180_05_orange_잡기실패.gif"
+  },
+  {
+   "cond": "yaw180",
+   "fruit": "Lemon",
+   "ep": 6,
+   "success": false,
+   "steps": 900,
+   "why": "접근 빗나감(12~30mm)",
+   "n_closes": 2,
+   "closes": [
+    {
+     "t": 121,
+     "dxy_cm": 2.1,
+     "tcp_h_cm": 3.0
+    },
+    {
+     "t": 212,
+     "dxy_cm": 17.3,
+     "tcp_h_cm": 8.6
+    }
+   ],
+   "max_lift_cm": 1.4,
+   "plate_dist_cm": 19.7,
+   "empty_to_plate": true,
+   "move_last20s_cm": 72.3,
+   "push_before_close_mm": 0.1,
+   "still_max_steps": 15,
+   "tipped": true,
+   "robot": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "count": 1,
+   "fruit_d_cm": [
+    0.9,
+    -1.2
+   ],
+   "yaw_deg": 120.5,
+   "light": null,
+   "gif": "report_html/assets/sweep_mix2_te01/yaw180_06_lemon_접근빗나감(12~30mm).gif"
+  },
+  {
+   "cond": "yaw180",
+   "fruit": "Banana",
+   "ep": 7,
+   "success": false,
+   "steps": 900,
+   "why": "들고 가다 떨어뜨림",
+   "n_closes": 2,
+   "closes": [
+    {
+     "t": 127,
+     "dxy_cm": 0.6,
+     "tcp_h_cm": 4.9
+    },
+    {
+     "t": 280,
+     "dxy_cm": 9.3,
+     "tcp_h_cm": 14.1
+    }
+   ],
+   "max_lift_cm": 4.6,
+   "plate_dist_cm": 20.1,
+   "empty_to_plate": false,
+   "move_last20s_cm": 27.1,
+   "push_before_close_mm": 11.2,
+   "still_max_steps": 14,
+   "tipped": true,
+   "robot": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "count": 1,
+   "fruit_d_cm": [
+    -0.6,
+    2.5
+   ],
+   "yaw_deg": 77.2,
+   "light": null,
+   "gif": "report_html/assets/sweep_mix2_te01/yaw180_07_banana_들고가다떨어뜨림.gif"
+  },
+  {
+   "cond": "rob5",
+   "fruit": "Strawberry",
+   "ep": 0,
+   "success": false,
+   "steps": 900,
+   "why": "접근 빗나감(30mm 초과)",
+   "n_closes": 3,
+   "closes": [
+    {
+     "t": 111,
+     "dxy_cm": 15.0,
+     "tcp_h_cm": 4.1
+    },
+    {
+     "t": 358,
+     "dxy_cm": 30.1,
+     "tcp_h_cm": 8.9
+    },
+    {
+     "t": 887,
+     "dxy_cm": 29.7,
+     "tcp_h_cm": 8.5
+    }
+   ],
+   "max_lift_cm": 0.0,
+   "plate_dist_cm": 26.3,
+   "empty_to_plate": true,
+   "move_last20s_cm": 65.3,
+   "push_before_close_mm": 0.0,
+   "still_max_steps": 8,
+   "tipped": false,
+   "robot": [
+    -0.9,
+    4.4,
+    -2.25
+   ],
+   "count": 1,
+   "fruit_d_cm": [
+    2.1,
+    2.0
+   ],
+   "yaw_deg": 0.0,
+   "light": null,
+   "gif": "report_html/assets/sweep_mix2_te01/rob5_00_strawberry_접근빗나감(30mm초과).gif"
+  },
+  {
+   "cond": "rob5",
+   "fruit": "Orange",
+   "ep": 1,
+   "success": true,
+   "steps": 184,
+   "why": "성공",
+   "n_closes": 1,
+   "closes": [
+    {
+     "t": 105,
+     "dxy_cm": 0.6,
+     "tcp_h_cm": 3.0
+    }
+   ],
+   "max_lift_cm": 12.1,
+   "plate_dist_cm": 3.7,
+   "empty_to_plate": false,
+   "move_last20s_cm": 53.6,
+   "push_before_close_mm": 0.2,
+   "still_max_steps": 13,
+   "tipped": true,
+   "robot": [
+    1.2,
+    -3.71,
+    -4.76
+   ],
+   "count": 1,
+   "fruit_d_cm": [
+    1.4,
+    -0.1
+   ],
+   "yaw_deg": 0.0,
+   "light": null,
+   "gif": "report_html/assets/sweep_mix2_te01/rob5_01_orange_ok.gif"
+  },
+  {
+   "cond": "rob5",
+   "fruit": "Lemon",
+   "ep": 2,
+   "success": false,
+   "steps": 900,
+   "why": "접근 빗나감(12~30mm)",
+   "n_closes": 1,
+   "closes": [
+    {
+     "t": 116,
+     "dxy_cm": 2.0,
+     "tcp_h_cm": 3.4
+    }
+   ],
+   "max_lift_cm": 1.9,
+   "plate_dist_cm": 18.9,
+   "empty_to_plate": true,
+   "move_last20s_cm": 97.1,
+   "push_before_close_mm": 0.2,
+   "still_max_steps": 14,
+   "tipped": true,
+   "robot": [
+    2.72,
+    1.39,
+    -5.46
+   ],
+   "count": 1,
+   "fruit_d_cm": [
+    -1.0,
+    2.6
+   ],
+   "yaw_deg": 0.0,
+   "light": null,
+   "gif": "report_html/assets/sweep_mix2_te01/rob5_02_lemon_접근빗나감(12~30mm).gif"
+  },
+  {
+   "cond": "rob5",
+   "fruit": "Banana",
+   "ep": 3,
+   "success": false,
+   "steps": 900,
+   "why": "접근 빗나감(12~30mm)",
+   "n_closes": 2,
+   "closes": [
+    {
+     "t": 116,
+     "dxy_cm": 2.6,
+     "tcp_h_cm": 5.1
+    },
+    {
+     "t": 290,
+     "dxy_cm": 11.0,
+     "tcp_h_cm": 14.6
+    }
+   ],
+   "max_lift_cm": 0.3,
+   "plate_dist_cm": 17.8,
+   "empty_to_plate": true,
+   "move_last20s_cm": 35.0,
+   "push_before_close_mm": 0.0,
+   "still_max_steps": 11,
+   "tipped": false,
+   "robot": [
+    -5.0,
+    -4.32,
+    -10.31
+   ],
+   "count": 1,
+   "fruit_d_cm": [
+    -2.5,
+    -3.0
+   ],
+   "yaw_deg": 0.0,
+   "light": null,
+   "gif": "report_html/assets/sweep_mix2_te01/rob5_03_banana_접근빗나감(12~30mm).gif"
+  },
+  {
+   "cond": "rob5",
+   "fruit": "Strawberry",
+   "ep": 4,
+   "success": false,
+   "steps": 900,
+   "why": "접근 빗나감(30mm 초과)",
+   "n_closes": 2,
+   "closes": [
+    {
+     "t": 111,
+     "dxy_cm": 16.8,
+     "tcp_h_cm": 2.8
+    },
+    {
+     "t": 253,
+     "dxy_cm": 30.6,
+     "tcp_h_cm": 10.9
+    }
+   ],
+   "max_lift_cm": 0.0,
+   "plate_dist_cm": 34.4,
+   "empty_to_plate": true,
+   "move_last20s_cm": 72.8,
+   "push_before_close_mm": 0.0,
+   "still_max_steps": 2,
+   "tipped": false,
+   "robot": [
+    3.96,
+    3.86,
+    -2.82
+   ],
+   "count": 1,
+   "fruit_d_cm": [
+    -2.8,
+    0.3
+   ],
+   "yaw_deg": 0.0,
+   "light": null,
+   "gif": "report_html/assets/sweep_mix2_te01/rob5_04_strawberry_접근빗나감(30mm초과).gif"
+  },
+  {
+   "cond": "rob5",
+   "fruit": "Orange",
+   "ep": 5,
+   "success": true,
+   "steps": 182,
+   "why": "성공",
+   "n_closes": 1,
+   "closes": [
+    {
+     "t": 109,
+     "dxy_cm": 0.5,
+     "tcp_h_cm": 3.0
+    }
+   ],
+   "max_lift_cm": 11.0,
+   "plate_dist_cm": 1.2,
+   "empty_to_plate": false,
+   "move_last20s_cm": 54.3,
+   "push_before_close_mm": 0.0,
+   "still_max_steps": 10,
+   "tipped": false,
+   "robot": [
+    1.39,
+    -1.31,
+    4.36
+   ],
+   "count": 1,
+   "fruit_d_cm": [
+    -0.1,
+    1.7
+   ],
+   "yaw_deg": 0.0,
+   "light": null
+  },
+  {
+   "cond": "rob5",
+   "fruit": "Lemon",
+   "ep": 6,
+   "success": false,
+   "steps": 900,
+   "why": "접근 빗나감(12~30mm)",
+   "n_closes": 2,
+   "closes": [
+    {
+     "t": 118,
+     "dxy_cm": 2.4,
+     "tcp_h_cm": 3.0
+    },
+    {
+     "t": 219,
+     "dxy_cm": 17.8,
+     "tcp_h_cm": 7.7
+    }
+   ],
+   "max_lift_cm": 1.8,
+   "plate_dist_cm": 22.5,
+   "empty_to_plate": true,
+   "move_last20s_cm": 84.4,
+   "push_before_close_mm": 0.1,
+   "still_max_steps": 13,
+   "tipped": true,
+   "robot": [
+    4.0,
+    3.03,
+    14.93
+   ],
+   "count": 1,
+   "fruit_d_cm": [
+    0.5,
+    -0.1
+   ],
+   "yaw_deg": 0.0,
+   "light": null,
+   "gif": "report_html/assets/sweep_mix2_te01/rob5_06_lemon_접근빗나감(12~30mm).gif"
+  },
+  {
+   "cond": "rob5",
+   "fruit": "Banana",
+   "ep": 7,
+   "success": false,
+   "steps": 900,
+   "why": "접근 빗나감(30mm 초과)",
+   "n_closes": 6,
+   "closes": [
+    {
+     "t": 128,
+     "dxy_cm": 9.0,
+     "tcp_h_cm": 3.1
+    },
+    {
+     "t": 289,
+     "dxy_cm": 7.4,
+     "tcp_h_cm": 12.4
+    },
+    {
+     "t": 463,
+     "dxy_cm": 9.9,
+     "tcp_h_cm": 10.2
+    },
+    {
+     "t": 626,
+     "dxy_cm": 13.1,
+     "tcp_h_cm": 11.7
+    },
+    {
+     "t": 748,
+     "dxy_cm": 15.3,
+     "tcp_h_cm": 9.3
+    },
+    {
+     "t": 885,
+     "dxy_cm": 14.6,
+     "tcp_h_cm": 9.5
+    }
+   ],
+   "max_lift_cm": 0.0,
+   "plate_dist_cm": 18.3,
+   "empty_to_plate": true,
+   "move_last20s_cm": 79.8,
+   "push_before_close_mm": 0.0,
+   "still_max_steps": 16,
+   "tipped": false,
+   "robot": [
+    -3.87,
+    -3.56,
+    12.25
+   ],
+   "count": 1,
+   "fruit_d_cm": [
+    2.0,
+    2.7
+   ],
+   "yaw_deg": 0.0,
+   "light": null,
+   "gif": "report_html/assets/sweep_mix2_te01/rob5_07_banana_접근빗나감(30mm초과).gif"
+  },
+  {
+   "cond": "rob10",
+   "fruit": "Strawberry",
+   "ep": 0,
+   "success": false,
+   "steps": 900,
+   "why": "접근 빗나감(30mm 초과)",
+   "n_closes": 5,
+   "closes": [
+    {
+     "t": 114,
+     "dxy_cm": 3.9,
+     "tcp_h_cm": 2.6
+    },
+    {
+     "t": 262,
+     "dxy_cm": 23.4,
+     "tcp_h_cm": 9.6
+    },
+    {
+     "t": 539,
+     "dxy_cm": 27.3,
+     "tcp_h_cm": 9.2
+    },
+    {
+     "t": 675,
+     "dxy_cm": 26.2,
+     "tcp_h_cm": 8.5
+    },
+    {
+     "t": 821,
+     "dxy_cm": 26.9,
+     "tcp_h_cm": 9.6
+    }
+   ],
+   "max_lift_cm": 0.0,
+   "plate_dist_cm": 29.7,
+   "empty_to_plate": true,
+   "move_last20s_cm": 130.4,
+   "push_before_close_mm": 0.0,
+   "still_max_steps": 12,
+   "tipped": false,
+   "robot": [
+    3.24,
+    -0.49,
+    10.01
+   ],
+   "count": 1,
+   "fruit_d_cm": [
+    -0.5,
+    1.3
+   ],
+   "yaw_deg": 0.0,
+   "light": null,
+   "gif": "report_html/assets/sweep_mix2_te01/rob10_00_strawberry_접근빗나감(30mm초과).gif"
+  },
+  {
+   "cond": "rob10",
+   "fruit": "Orange",
+   "ep": 1,
+   "success": false,
+   "steps": 900,
+   "why": "접근 빗나감(30mm 초과)",
+   "n_closes": 1,
+   "closes": [
+    {
+     "t": 109,
+     "dxy_cm": 5.8,
+     "tcp_h_cm": 2.2
+    }
+   ],
+   "max_lift_cm": 0.0,
+   "plate_dist_cm": 28.1,
+   "empty_to_plate": true,
+   "move_last20s_cm": 90.6,
+   "push_before_close_mm": 0.1,
+   "still_max_steps": 10,
+   "tipped": false,
+   "robot": [
+    7.03,
+    3.48,
+    -18.9
+   ],
+   "count": 1,
+   "fruit_d_cm": [
+    0.3,
+    2.1
+   ],
+   "yaw_deg": 0.0,
+   "light": null,
+   "gif": "report_html/assets/sweep_mix2_te01/rob10_01_orange_접근빗나감(30mm초과).gif"
+  },
+  {
+   "cond": "rob10",
+   "fruit": "Lemon",
+   "ep": 2,
+   "success": true,
+   "steps": 198,
+   "why": "성공",
+   "n_closes": 1,
+   "closes": [
+    {
+     "t": 111,
+     "dxy_cm": 1.2,
+     "tcp_h_cm": 2.5
+    }
+   ],
+   "max_lift_cm": 12.1,
+   "plate_dist_cm": 6.2,
+   "empty_to_plate": false,
+   "move_last20s_cm": 49.4,
+   "push_before_close_mm": 0.9,
+   "still_max_steps": 15,
+   "tipped": true,
+   "robot": [
+    6.83,
+    5.3,
+    5.74
+   ],
+   "count": 1,
+   "fruit_d_cm": [
+    2.6,
+    0.7
+   ],
+   "yaw_deg": 0.0,
+   "light": null,
+   "gif": "report_html/assets/sweep_mix2_te01/rob10_02_lemon_ok.gif"
+  },
+  {
+   "cond": "rob10",
+   "fruit": "Banana",
+   "ep": 3,
+   "success": false,
+   "steps": 900,
+   "why": "접근 빗나감(30mm 초과)",
+   "n_closes": 4,
+   "closes": [
+    {
+     "t": 117,
+     "dxy_cm": 4.6,
+     "tcp_h_cm": 3.0
+    },
+    {
+     "t": 290,
+     "dxy_cm": 10.8,
+     "tcp_h_cm": 14.4
+    },
+    {
+     "t": 496,
+     "dxy_cm": 11.3,
+     "tcp_h_cm": 16.9
+    },
+    {
+     "t": 791,
+     "dxy_cm": 8.9,
+     "tcp_h_cm": 15.7
+    }
+   ],
+   "max_lift_cm": 0.8,
+   "plate_dist_cm": 17.9,
+   "empty_to_plate": true,
+   "move_last20s_cm": 69.2,
+   "push_before_close_mm": 0.1,
+   "still_max_steps": 11,
+   "tipped": false,
+   "robot": [
+    -4.08,
+    -2.93,
+    -8.5
+   ],
+   "count": 1,
+   "fruit_d_cm": [
+    0.1,
+    1.3
+   ],
+   "yaw_deg": 0.0,
+   "light": null,
+   "gif": "report_html/assets/sweep_mix2_te01/rob10_03_banana_접근빗나감(30mm초과).gif"
+  },
+  {
+   "cond": "rob10",
+   "fruit": "Strawberry",
+   "ep": 4,
+   "success": false,
+   "steps": 900,
+   "why": "접근 빗나감(12~30mm)",
+   "n_closes": 1,
+   "closes": [
+    {
+     "t": 113,
+     "dxy_cm": 1.5,
+     "tcp_h_cm": 2.9
+    }
+   ],
+   "max_lift_cm": 0.9,
+   "plate_dist_cm": 32.7,
+   "empty_to_plate": true,
+   "move_last20s_cm": 62.2,
+   "push_before_close_mm": 0.2,
+   "still_max_steps": 10,
+   "tipped": false,
+   "robot": [
+    3.41,
+    -5.83,
+    1.58
+   ],
+   "count": 1,
+   "fruit_d_cm": [
+    -3.0,
+    -2.3
+   ],
+   "yaw_deg": 0.0,
+   "light": null,
+   "gif": "report_html/assets/sweep_mix2_te01/rob10_04_strawberry_접근빗나감(12~30mm).gif"
+  },
+  {
+   "cond": "rob10",
+   "fruit": "Orange",
+   "ep": 5,
+   "success": false,
+   "steps": 900,
+   "why": "잡기 실패",
+   "n_closes": 1,
+   "closes": [
+    {
+     "t": 115,
+     "dxy_cm": 0.4,
+     "tcp_h_cm": 3.2
+    }
+   ],
+   "max_lift_cm": 1.2,
+   "plate_dist_cm": 23.2,
+   "empty_to_plate": true,
+   "move_last20s_cm": 35.2,
+   "push_before_close_mm": 0.1,
+   "still_max_steps": 12,
+   "tipped": true,
+   "robot": [
+    4.29,
+    8.24,
+    27.47
+   ],
+   "count": 1,
+   "fruit_d_cm": [
+    1.1,
+    2.1
+   ],
+   "yaw_deg": 0.0,
+   "light": null,
+   "gif": "report_html/assets/sweep_mix2_te01/rob10_05_orange_잡기실패.gif"
+  },
+  {
+   "cond": "rob10",
+   "fruit": "Lemon",
+   "ep": 6,
+   "success": false,
+   "steps": 900,
+   "why": "접근 빗나감(30mm 초과)",
+   "n_closes": 1,
+   "closes": [
+    {
+     "t": 113,
+     "dxy_cm": 13.3,
+     "tcp_h_cm": 4.3
+    }
+   ],
+   "max_lift_cm": 0.1,
+   "plate_dist_cm": 23.5,
+   "empty_to_plate": true,
+   "move_last20s_cm": 47.8,
+   "push_before_close_mm": 0.1,
+   "still_max_steps": 11,
+   "tipped": false,
+   "robot": [
+    -9.27,
+    6.76,
+    18.64
+   ],
+   "count": 1,
+   "fruit_d_cm": [
+    -2.2,
+    0.0
+   ],
+   "yaw_deg": 0.0,
+   "light": null,
+   "gif": "report_html/assets/sweep_mix2_te01/rob10_06_lemon_접근빗나감(30mm초과).gif"
+  },
+  {
+   "cond": "rob10",
+   "fruit": "Banana",
+   "ep": 7,
+   "success": true,
+   "steps": 191,
+   "why": "성공",
+   "n_closes": 1,
+   "closes": [
+    {
+     "t": 112,
+     "dxy_cm": 1.2,
+     "tcp_h_cm": 2.7
+    }
+   ],
+   "max_lift_cm": 11.7,
+   "plate_dist_cm": 8.8,
+   "empty_to_plate": false,
+   "move_last20s_cm": 54.0,
+   "push_before_close_mm": 2.8,
+   "still_max_steps": 11,
+   "tipped": true,
+   "robot": [
+    5.69,
+    -0.32,
+    19.81
+   ],
+   "count": 1,
+   "fruit_d_cm": [
+    -1.1,
+    -0.7
+   ],
+   "yaw_deg": 0.0,
+   "light": null
+  },
+  {
+   "cond": "plate6",
+   "fruit": "Strawberry",
+   "ep": 0,
+   "success": false,
+   "steps": 900,
+   "why": "들고 가다 떨어뜨림",
+   "n_closes": 5,
+   "closes": [
+    {
+     "t": 116,
+     "dxy_cm": 2.2,
+     "tcp_h_cm": 2.8
+    },
+    {
+     "t": 231,
+     "dxy_cm": 22.2,
+     "tcp_h_cm": 6.5
+    },
+    {
+     "t": 336,
+     "dxy_cm": 26.0,
+     "tcp_h_cm": 9.7
+    },
+    {
+     "t": 588,
+     "dxy_cm": 22.8,
+     "tcp_h_cm": 10.0
+    },
+    {
+     "t": 709,
+     "dxy_cm": 26.0,
+     "tcp_h_cm": 9.6
+    }
+   ],
+   "max_lift_cm": 2.2,
+   "plate_dist_cm": 29.7,
+   "empty_to_plate": false,
+   "move_last20s_cm": 71.9,
+   "push_before_close_mm": 0.1,
+   "still_max_steps": 10,
+   "tipped": true,
+   "robot": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "plate_cm": [
+    2.2,
+    1.1
+   ],
+   "count": 1,
+   "fruit_d_cm": [
+    1.3,
+    -2.7
+   ],
+   "yaw_deg": 0.0,
+   "light": null,
+   "gif": "report_html/assets/sweep_mix2_te01/plate6_00_strawberry_들고가다떨어뜨림.gif"
+  },
+  {
+   "cond": "plate6",
+   "fruit": "Orange",
+   "ep": 1,
+   "success": false,
+   "steps": 900,
+   "why": "잡기 실패",
+   "n_closes": 1,
+   "closes": [
+    {
+     "t": 111,
+     "dxy_cm": 0.1,
+     "tcp_h_cm": 3.3
+    }
+   ],
+   "max_lift_cm": 1.0,
+   "plate_dist_cm": 34.1,
+   "empty_to_plate": true,
+   "move_last20s_cm": 87.8,
+   "push_before_close_mm": 0.1,
+   "still_max_steps": 8,
+   "tipped": true,
+   "robot": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "plate_cm": [
+    3.3,
+    4.9
+   ],
+   "count": 1,
+   "fruit_d_cm": [
+    -2.8,
+    -0.3
+   ],
+   "yaw_deg": 0.0,
+   "light": null,
+   "gif": "report_html/assets/sweep_mix2_te01/plate6_01_orange_잡기실패.gif"
+  },
+  {
+   "cond": "plate6",
+   "fruit": "Lemon",
+   "ep": 2,
+   "success": false,
+   "steps": 900,
+   "why": "들고 가다 떨어뜨림",
+   "n_closes": 1,
+   "closes": [
+    {
+     "t": 117,
+     "dxy_cm": 1.4,
+     "tcp_h_cm": 3.4
+    }
+   ],
+   "max_lift_cm": 2.2,
+   "plate_dist_cm": 17.4,
+   "empty_to_plate": false,
+   "move_last20s_cm": 83.6,
+   "push_before_close_mm": 0.2,
+   "still_max_steps": 16,
+   "tipped": true,
+   "robot": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "plate_cm": [
+    -3.7,
+    -3.8
+   ],
+   "count": 1,
+   "fruit_d_cm": [
+    0.1,
+    -2.6
+   ],
+   "yaw_deg": 0.0,
+   "light": null,
+   "gif": "report_html/assets/sweep_mix2_te01/plate6_02_lemon_들고가다떨어뜨림.gif"
+  },
+  {
+   "cond": "plate6",
+   "fruit": "Banana",
+   "ep": 3,
+   "success": false,
+   "steps": 900,
+   "why": "접근 빗나감(30mm 초과)",
+   "n_closes": 6,
+   "closes": [
+    {
+     "t": 119,
+     "dxy_cm": 5.7,
+     "tcp_h_cm": 4.9
+    },
+    {
+     "t": 267,
+     "dxy_cm": 11.2,
+     "tcp_h_cm": 9.6
+    },
+    {
+     "t": 401,
+     "dxy_cm": 11.2,
+     "tcp_h_cm": 9.4
+    },
+    {
+     "t": 563,
+     "dxy_cm": 10.8,
+     "tcp_h_cm": 10.3
+    },
+    {
+     "t": 725,
+     "dxy_cm": 10.0,
+     "tcp_h_cm": 10.2
+    },
+    {
+     "t": 884,
+     "dxy_cm": 10.5,
+     "tcp_h_cm": 8.3
+    }
+   ],
+   "max_lift_cm": 1.9,
+   "plate_dist_cm": 14.2,
+   "empty_to_plate": true,
+   "move_last20s_cm": 87.2,
+   "push_before_close_mm": 0.0,
+   "still_max_steps": 12,
+   "tipped": false,
+   "robot": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "plate_cm": [
+    -5.2,
+    -2.0
+   ],
+   "count": 1,
+   "fruit_d_cm": [
+    -1.9,
+    2.2
+   ],
+   "yaw_deg": 0.0,
+   "light": null,
+   "gif": "report_html/assets/sweep_mix2_te01/plate6_03_banana_접근빗나감(30mm초과).gif"
+  },
+  {
+   "cond": "plate6",
+   "fruit": "Strawberry",
+   "ep": 4,
+   "success": false,
+   "steps": 900,
+   "why": "접근 빗나감(30mm 초과)",
+   "n_closes": 3,
+   "closes": [
+    {
+     "t": 117,
+     "dxy_cm": 6.6,
+     "tcp_h_cm": 3.1
+    },
+    {
+     "t": 515,
+     "dxy_cm": 25.2,
+     "tcp_h_cm": 8.1
+    },
+    {
+     "t": 653,
+     "dxy_cm": 25.8,
+     "tcp_h_cm": 8.9
+    }
+   ],
+   "max_lift_cm": 0.0,
+   "plate_dist_cm": 26.7,
+   "empty_to_plate": true,
+   "move_last20s_cm": 50.9,
+   "push_before_close_mm": 0.0,
+   "still_max_steps": 11,
+   "tipped": false,
+   "robot": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "plate_cm": [
+    -2.3,
+    3.9
+   ],
+   "count": 1,
+   "fruit_d_cm": [
+    0.0,
+    -1.2
+   ],
+   "yaw_deg": 0.0,
+   "light": null,
+   "gif": "report_html/assets/sweep_mix2_te01/plate6_04_strawberry_접근빗나감(30mm초과).gif"
+  },
+  {
+   "cond": "plate6",
+   "fruit": "Orange",
+   "ep": 5,
+   "success": true,
+   "steps": 186,
+   "why": "성공",
+   "n_closes": 1,
+   "closes": [
+    {
+     "t": 113,
+     "dxy_cm": 0.6,
+     "tcp_h_cm": 3.0
+    }
+   ],
+   "max_lift_cm": 11.1,
+   "plate_dist_cm": 1.5,
+   "empty_to_plate": false,
+   "move_last20s_cm": 54.5,
+   "push_before_close_mm": 0.1,
+   "still_max_steps": 11,
+   "tipped": false,
+   "robot": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "plate_cm": [
+    0.6,
+    -1.1
+   ],
+   "count": 1,
+   "fruit_d_cm": [
+    1.6,
+    0.5
+   ],
+   "yaw_deg": 0.0,
+   "light": null,
+   "gif": "report_html/assets/sweep_mix2_te01/plate6_05_orange_ok.gif"
+  },
+  {
+   "cond": "plate6",
+   "fruit": "Lemon",
+   "ep": 6,
+   "success": false,
+   "steps": 900,
+   "why": "잡기 실패",
+   "n_closes": 4,
+   "closes": [
+    {
+     "t": 112,
+     "dxy_cm": 1.0,
+     "tcp_h_cm": 3.3
+    },
+    {
+     "t": 215,
+     "dxy_cm": 17.3,
+     "tcp_h_cm": 5.7
+    },
+    {
+     "t": 231,
+     "dxy_cm": 14.7,
+     "tcp_h_cm": 5.7
+    },
+    {
+     "t": 341,
+     "dxy_cm": 22.6,
+     "tcp_h_cm": 7.5
+    }
+   ],
+   "max_lift_cm": 1.0,
+   "plate_dist_cm": 21.0,
+   "empty_to_plate": true,
+   "move_last20s_cm": 74.0,
+   "push_before_close_mm": 0.1,
+   "still_max_steps": 11,
+   "tipped": false,
+   "robot": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "plate_cm": [
+    -2.4,
+    -2.2
+   ],
+   "count": 1,
+   "fruit_d_cm": [
+    -2.3,
+    -0.0
+   ],
+   "yaw_deg": 0.0,
+   "light": null,
+   "gif": "report_html/assets/sweep_mix2_te01/plate6_06_lemon_잡기실패.gif"
+  },
+  {
+   "cond": "plate6",
+   "fruit": "Banana",
+   "ep": 7,
+   "success": false,
+   "steps": 900,
+   "why": "접근 빗나감(30mm 초과)",
+   "n_closes": 4,
+   "closes": [
+    {
+     "t": 120,
+     "dxy_cm": 3.8,
+     "tcp_h_cm": 5.0
+    },
+    {
+     "t": 286,
+     "dxy_cm": 12.6,
+     "tcp_h_cm": 14.1
+    },
+    {
+     "t": 421,
+     "dxy_cm": 12.1,
+     "tcp_h_cm": 16.3
+    },
+    {
+     "t": 671,
+     "dxy_cm": 12.3,
+     "tcp_h_cm": 15.8
+    }
+   ],
+   "max_lift_cm": 1.4,
+   "plate_dist_cm": 19.2,
+   "empty_to_plate": true,
+   "move_last20s_cm": 84.5,
+   "push_before_close_mm": 0.0,
+   "still_max_steps": 13,
+   "tipped": false,
+   "robot": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "plate_cm": [
+    4.2,
+    2.4
+   ],
+   "count": 1,
+   "fruit_d_cm": [
+    1.6,
+    2.3
+   ],
+   "yaw_deg": 0.0,
+   "light": null,
+   "gif": "report_html/assets/sweep_mix2_te01/plate6_07_banana_접근빗나감(30mm초과).gif"
+  },
+  {
+   "cond": "cnt23",
+   "fruit": "Strawberry",
+   "ep": 0,
+   "success": false,
+   "steps": 900,
+   "why": "접근 빗나감(12~30mm)",
+   "n_closes": 3,
+   "closes": [
+    {
+     "t": 114,
+     "dxy_cm": 1.6,
+     "tcp_h_cm": 2.3
+    },
+    {
+     "t": 228,
+     "dxy_cm": 3.0,
+     "tcp_h_cm": 6.5
+    },
+    {
+     "t": 357,
+     "dxy_cm": 17.4,
+     "tcp_h_cm": 9.0
+    }
+   ],
+   "max_lift_cm": 1.5,
+   "plate_dist_cm": 16.3,
+   "empty_to_plate": true,
+   "move_last20s_cm": 92.6,
+   "push_before_close_mm": 0.0,
+   "still_max_steps": 9,
+   "tipped": true,
+   "robot": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "count": 3,
+   "extra": {},
+   "light": null,
+   "gif": "report_html/assets/sweep_mix2_te01/cnt23_00_strawberry_접근빗나감(12~30mm).gif"
+  },
+  {
+   "cond": "cnt23",
+   "fruit": "Orange",
+   "ep": 1,
+   "success": false,
+   "steps": 900,
+   "why": "들고 가다 떨어뜨림",
+   "n_closes": 1,
+   "closes": [
+    {
+     "t": 113,
+     "dxy_cm": 1.7,
+     "tcp_h_cm": 3.7
+    }
+   ],
+   "max_lift_cm": 2.2,
+   "plate_dist_cm": 35.0,
+   "empty_to_plate": false,
+   "move_last20s_cm": 45.9,
+   "push_before_close_mm": 0.2,
+   "still_max_steps": 11,
+   "tipped": true,
+   "robot": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "count": 2,
+   "extra": {},
+   "light": null,
+   "gif": "report_html/assets/sweep_mix2_te01/cnt23_01_orange_들고가다떨어뜨림.gif"
+  },
+  {
+   "cond": "cnt23",
+   "fruit": "Lemon",
+   "ep": 2,
+   "success": false,
+   "steps": 900,
+   "why": "잡기 실패",
+   "n_closes": 3,
+   "closes": [
+    {
+     "t": 111,
+     "dxy_cm": 0.5,
+     "tcp_h_cm": 3.3
+    },
+    {
+     "t": 233,
+     "dxy_cm": 3.1,
+     "tcp_h_cm": 6.7
+    },
+    {
+     "t": 338,
+     "dxy_cm": 15.2,
+     "tcp_h_cm": 8.1
+    }
+   ],
+   "max_lift_cm": 1.5,
+   "plate_dist_cm": 16.5,
+   "empty_to_plate": true,
+   "move_last20s_cm": 75.2,
+   "push_before_close_mm": 0.2,
+   "still_max_steps": 6,
+   "tipped": true,
+   "robot": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "count": 2,
+   "extra": {},
+   "light": null,
+   "gif": "report_html/assets/sweep_mix2_te01/cnt23_02_lemon_잡기실패.gif"
+  },
+  {
+   "cond": "cnt23",
+   "fruit": "Banana",
+   "ep": 3,
+   "success": false,
+   "steps": 900,
+   "why": "들고 가다 떨어뜨림",
+   "n_closes": 5,
+   "closes": [
+    {
+     "t": 115,
+     "dxy_cm": 7.6,
+     "tcp_h_cm": 5.0
+    },
+    {
+     "t": 266,
+     "dxy_cm": 6.7,
+     "tcp_h_cm": 6.6
+    },
+    {
+     "t": 421,
+     "dxy_cm": 14.0,
+     "tcp_h_cm": 13.8
+    },
+    {
+     "t": 551,
+     "dxy_cm": 14.5,
+     "tcp_h_cm": 7.3
+    },
+    {
+     "t": 650,
+     "dxy_cm": 12.7,
+     "tcp_h_cm": 10.7
+    }
+   ],
+   "max_lift_cm": 2.6,
+   "plate_dist_cm": 24.6,
+   "empty_to_plate": false,
+   "move_last20s_cm": 84.5,
+   "push_before_close_mm": 1.3,
+   "still_max_steps": 8,
+   "tipped": false,
+   "robot": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "count": 2,
+   "extra": {},
+   "light": null,
+   "gif": "report_html/assets/sweep_mix2_te01/cnt23_03_banana_들고가다떨어뜨림.gif"
+  },
+  {
+   "cond": "cnt23",
+   "fruit": "Strawberry",
+   "ep": 4,
+   "success": false,
+   "steps": 900,
+   "why": "접근 빗나감(12~30mm)",
+   "n_closes": 7,
+   "closes": [
+    {
+     "t": 121,
+     "dxy_cm": 2.3,
+     "tcp_h_cm": 3.4
+    },
+    {
+     "t": 233,
+     "dxy_cm": 9.8,
+     "tcp_h_cm": 7.3
+    },
+    {
+     "t": 352,
+     "dxy_cm": 11.8,
+     "tcp_h_cm": 8.2
+    },
+    {
+     "t": 490,
+     "dxy_cm": 12.0,
+     "tcp_h_cm": 7.9
+    },
+    {
+     "t": 617,
+     "dxy_cm": 11.0,
+     "tcp_h_cm": 7.4
+    },
+    {
+     "t": 746,
+     "dxy_cm": 11.8,
+     "tcp_h_cm": 7.5
+    }
+   ],
+   "max_lift_cm": 1.5,
+   "plate_dist_cm": 15.7,
+   "empty_to_plate": true,
+   "move_last20s_cm": 102.6,
+   "push_before_close_mm": 0.5,
+   "still_max_steps": 15,
+   "tipped": true,
+   "robot": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "count": 2,
+   "extra": {},
+   "light": null,
+   "gif": "report_html/assets/sweep_mix2_te01/cnt23_04_strawberry_접근빗나감(12~30mm).gif"
+  },
+  {
+   "cond": "cnt23",
+   "fruit": "Orange",
+   "ep": 5,
+   "success": false,
+   "steps": 900,
+   "why": "접근 빗나감(12~30mm)",
+   "n_closes": 1,
+   "closes": [
+    {
+     "t": 107,
+     "dxy_cm": 1.3,
+     "tcp_h_cm": 6.3
+    }
+   ],
+   "max_lift_cm": 0.2,
+   "plate_dist_cm": 22.2,
+   "empty_to_plate": true,
+   "move_last20s_cm": 100.3,
+   "push_before_close_mm": 0.6,
+   "still_max_steps": 14,
+   "tipped": false,
+   "robot": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "count": 2,
+   "extra": {},
+   "light": null,
+   "gif": "report_html/assets/sweep_mix2_te01/cnt23_05_orange_접근빗나감(12~30mm).gif"
+  },
+  {
+   "cond": "cnt23",
+   "fruit": "Lemon",
+   "ep": 6,
+   "success": true,
+   "steps": 181,
+   "why": "성공",
+   "n_closes": 1,
+   "closes": [
+    {
+     "t": 113,
+     "dxy_cm": 0.9,
+     "tcp_h_cm": 3.3
+    }
+   ],
+   "max_lift_cm": 10.4,
+   "plate_dist_cm": 7.6,
+   "empty_to_plate": false,
+   "move_last20s_cm": 64.7,
+   "push_before_close_mm": 0.1,
+   "still_max_steps": 15,
+   "tipped": true,
+   "robot": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "count": 2,
+   "extra": {},
+   "light": null,
+   "gif": "report_html/assets/sweep_mix2_te01/cnt23_06_lemon_ok.gif"
+  },
+  {
+   "cond": "cnt23",
+   "fruit": "Banana",
+   "ep": 7,
+   "success": false,
+   "steps": 900,
+   "why": "들고 가다 떨어뜨림",
+   "n_closes": 6,
+   "closes": [
+    {
+     "t": 118,
+     "dxy_cm": 3.0,
+     "tcp_h_cm": 2.6
+    },
+    {
+     "t": 283,
+     "dxy_cm": 16.6,
+     "tcp_h_cm": 15.4
+    },
+    {
+     "t": 445,
+     "dxy_cm": 17.1,
+     "tcp_h_cm": 11.2
+    },
+    {
+     "t": 606,
+     "dxy_cm": 18.6,
+     "tcp_h_cm": 11.6
+    },
+    {
+     "t": 757,
+     "dxy_cm": 18.5,
+     "tcp_h_cm": 12.4
+    },
+    {
+     "t": 897,
+     "dxy_cm": 19.2,
+     "tcp_h_cm": 11.3
+    }
+   ],
+   "max_lift_cm": 7.2,
+   "plate_dist_cm": 34.2,
+   "empty_to_plate": false,
+   "move_last20s_cm": 77.0,
+   "push_before_close_mm": 8.6,
+   "still_max_steps": 12,
+   "tipped": true,
+   "robot": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "count": 2,
+   "extra": {},
+   "light": null,
+   "gif": "report_html/assets/sweep_mix2_te01/cnt23_07_banana_들고가다떨어뜨림.gif"
+  },
+  {
+   "cond": "cnt4",
+   "fruit": "Strawberry",
+   "ep": 0,
+   "success": false,
+   "steps": 900,
+   "why": "접근 빗나감(12~30mm)",
+   "n_closes": 4,
+   "closes": [
+    {
+     "t": 116,
+     "dxy_cm": 1.6,
+     "tcp_h_cm": 4.2
+    },
+    {
+     "t": 225,
+     "dxy_cm": 6.4,
+     "tcp_h_cm": 6.7
+    },
+    {
+     "t": 369,
+     "dxy_cm": 18.3,
+     "tcp_h_cm": 8.8
+    },
+    {
+     "t": 790,
+     "dxy_cm": 20.4,
+     "tcp_h_cm": 8.3
+    }
+   ],
+   "max_lift_cm": 0.5,
+   "plate_dist_cm": 24.1,
+   "empty_to_plate": true,
+   "move_last20s_cm": 79.0,
+   "push_before_close_mm": 0.5,
+   "still_max_steps": 11,
+   "tipped": false,
+   "robot": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "count": 4,
+   "extra": {},
+   "light": null,
+   "gif": "report_html/assets/sweep_mix2_te01/cnt4_00_strawberry_접근빗나감(12~30mm).gif"
+  },
+  {
+   "cond": "cnt4",
+   "fruit": "Orange",
+   "ep": 1,
+   "success": false,
+   "steps": 900,
+   "why": "접근 빗나감(12~30mm)",
+   "n_closes": 1,
+   "closes": [
+    {
+     "t": 112,
+     "dxy_cm": 1.4,
+     "tcp_h_cm": 2.9
+    }
+   ],
+   "max_lift_cm": 1.5,
+   "plate_dist_cm": 17.7,
+   "empty_to_plate": true,
+   "move_last20s_cm": 51.8,
+   "push_before_close_mm": 0.1,
+   "still_max_steps": 9,
+   "tipped": true,
+   "robot": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "count": 4,
+   "extra": {},
+   "light": null,
+   "gif": "report_html/assets/sweep_mix2_te01/cnt4_01_orange_접근빗나감(12~30mm).gif"
+  },
+  {
+   "cond": "cnt4",
+   "fruit": "Lemon",
+   "ep": 2,
+   "success": false,
+   "steps": 900,
+   "why": "접근 빗나감(12~30mm)",
+   "n_closes": 3,
+   "closes": [
+    {
+     "t": 116,
+     "dxy_cm": 1.5,
+     "tcp_h_cm": 5.2
+    },
+    {
+     "t": 226,
+     "dxy_cm": 15.0,
+     "tcp_h_cm": 6.5
+    },
+    {
+     "t": 482,
+     "dxy_cm": 19.0,
+     "tcp_h_cm": 7.6
+    }
+   ],
+   "max_lift_cm": 0.3,
+   "plate_dist_cm": 22.5,
+   "empty_to_plate": true,
+   "move_last20s_cm": 67.9,
+   "push_before_close_mm": 0.2,
+   "still_max_steps": 10,
+   "tipped": true,
+   "robot": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "count": 4,
+   "extra": {},
+   "light": null,
+   "gif": "report_html/assets/sweep_mix2_te01/cnt4_02_lemon_접근빗나감(12~30mm).gif"
+  },
+  {
+   "cond": "cnt4",
+   "fruit": "Banana",
+   "ep": 3,
+   "success": false,
+   "steps": 900,
+   "why": "접근 빗나감(12~30mm)",
+   "n_closes": 6,
+   "closes": [
+    {
+     "t": 115,
+     "dxy_cm": 2.9,
+     "tcp_h_cm": 5.1
+    },
+    {
+     "t": 268,
+     "dxy_cm": 8.0,
+     "tcp_h_cm": 7.5
+    },
+    {
+     "t": 408,
+     "dxy_cm": 4.8,
+     "tcp_h_cm": 13.4
+    },
+    {
+     "t": 562,
+     "dxy_cm": 10.9,
+     "tcp_h_cm": 5.7
+    },
+    {
+     "t": 700,
+     "dxy_cm": 5.1,
+     "tcp_h_cm": 10.3
+    },
+    {
+     "t": 833,
+     "dxy_cm": 9.8,
+     "tcp_h_cm": 5.8
+    }
+   ],
+   "max_lift_cm": 1.1,
+   "plate_dist_cm": 16.0,
+   "empty_to_plate": true,
+   "move_last20s_cm": 108.0,
+   "push_before_close_mm": 2.2,
+   "still_max_steps": 15,
+   "tipped": false,
+   "robot": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "count": 4,
+   "extra": {},
+   "light": null,
+   "gif": "report_html/assets/sweep_mix2_te01/cnt4_03_banana_접근빗나감(12~30mm).gif"
+  },
+  {
+   "cond": "cnt4",
+   "fruit": "Strawberry",
+   "ep": 4,
+   "success": false,
+   "steps": 900,
+   "why": "접근 빗나감(30mm 초과)",
+   "n_closes": 2,
+   "closes": [
+    {
+     "t": 112,
+     "dxy_cm": 5.1,
+     "tcp_h_cm": 2.6
+    },
+    {
+     "t": 700,
+     "dxy_cm": 15.7,
+     "tcp_h_cm": 8.1
+    }
+   ],
+   "max_lift_cm": 0.0,
+   "plate_dist_cm": 15.6,
+   "empty_to_plate": true,
+   "move_last20s_cm": 95.8,
+   "push_before_close_mm": 0.0,
+   "still_max_steps": 8,
+   "tipped": false,
+   "robot": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "count": 4,
+   "extra": {},
+   "light": null,
+   "gif": "report_html/assets/sweep_mix2_te01/cnt4_04_strawberry_접근빗나감(30mm초과).gif"
+  },
+  {
+   "cond": "cnt4",
+   "fruit": "Orange",
+   "ep": 5,
+   "success": false,
+   "steps": 900,
+   "why": "접근 빗나감(12~30mm)",
+   "n_closes": 1,
+   "closes": [
+    {
+     "t": 108,
+     "dxy_cm": 2.7,
+     "tcp_h_cm": 3.4
+    }
+   ],
+   "max_lift_cm": 1.7,
+   "plate_dist_cm": 28.3,
+   "empty_to_plate": true,
+   "move_last20s_cm": 53.2,
+   "push_before_close_mm": 0.1,
+   "still_max_steps": 9,
+   "tipped": true,
+   "robot": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "count": 4,
+   "extra": {},
+   "light": null,
+   "gif": "report_html/assets/sweep_mix2_te01/cnt4_05_orange_접근빗나감(12~30mm).gif"
+  },
+  {
+   "cond": "cnt4",
+   "fruit": "Lemon",
+   "ep": 6,
+   "success": false,
+   "steps": 900,
+   "why": "접근 빗나감(12~30mm)",
+   "n_closes": 6,
+   "closes": [
+    {
+     "t": 113,
+     "dxy_cm": 2.0,
+     "tcp_h_cm": 2.7
+    },
+    {
+     "t": 237,
+     "dxy_cm": 4.3,
+     "tcp_h_cm": 6.8
+    },
+    {
+     "t": 417,
+     "dxy_cm": 24.3,
+     "tcp_h_cm": 9.4
+    },
+    {
+     "t": 568,
+     "dxy_cm": 23.2,
+     "tcp_h_cm": 8.0
+    },
+    {
+     "t": 703,
+     "dxy_cm": 25.6,
+     "tcp_h_cm": 10.3
+    },
+    {
+     "t": 847,
+     "dxy_cm": 24.8,
+     "tcp_h_cm": 9.4
+    }
+   ],
+   "max_lift_cm": 0.4,
+   "plate_dist_cm": 30.0,
+   "empty_to_plate": true,
+   "move_last20s_cm": 89.1,
+   "push_before_close_mm": 0.1,
+   "still_max_steps": 6,
+   "tipped": true,
+   "robot": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "count": 4,
+   "extra": {},
+   "light": null,
+   "gif": "report_html/assets/sweep_mix2_te01/cnt4_06_lemon_접근빗나감(12~30mm).gif"
+  },
+  {
+   "cond": "cnt4",
+   "fruit": "Banana",
+   "ep": 7,
+   "success": true,
+   "steps": 876,
+   "why": "성공",
+   "n_closes": 7,
+   "closes": [
+    {
+     "t": 121,
+     "dxy_cm": 9.4,
+     "tcp_h_cm": 2.9
+    },
+    {
+     "t": 271,
+     "dxy_cm": 4.8,
+     "tcp_h_cm": 7.8
+    },
+    {
+     "t": 391,
+     "dxy_cm": 2.8,
+     "tcp_h_cm": 8.1
+    },
+    {
+     "t": 504,
+     "dxy_cm": 3.4,
+     "tcp_h_cm": 6.5
+    },
+    {
+     "t": 631,
+     "dxy_cm": 1.7,
+     "tcp_h_cm": 8.6
+    },
+    {
+     "t": 748,
+     "dxy_cm": 2.0,
+     "tcp_h_cm": 7.7
+    }
+   ],
+   "max_lift_cm": 2.4,
+   "plate_dist_cm": 10.8,
+   "empty_to_plate": true,
+   "move_last20s_cm": 129.1,
+   "push_before_close_mm": 0.0,
+   "still_max_steps": 16,
+   "tipped": true,
+   "robot": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "count": 4,
+   "extra": {},
+   "light": null,
+   "gif": "report_html/assets/sweep_mix2_te01/cnt4_07_banana_ok.gif"
+  }
+ ],
+ "wall_s": 4828
+}
