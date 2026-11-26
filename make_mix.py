@@ -4,7 +4,7 @@
       --src ~/datasets/fruit_scripted_v2:logs/gen_fruit_scripted_v2.jsonl:all:no_other_fruit \
       --src ~/datasets/team_lemon_ref::lemon: --src ~/datasets/team_strawberry_clean::strawberry:
 
---src 형식  경로:생성로그(없으면 빈칸):과일(all 또는 lemon,orange...):필터(no_other_fruit 등, 없으면 빈칸)[:최대개수/과일]
+--src 형식  경로:생성로그(없으면 빈칸):과일(all 또는 lemon,orange...):필터(no_other_fruit 등, 없으면 빈칸)[:최대개수/과일[:ex=뺄 원본 에피소드 번호를 +로]]
   - no_other_fruit : 다른 종류 방해 과일이 있는 에피소드 제외 (ACT 는 작업 문구를 입력으로 쓰지 않아 대상 과일을 구분할 수 없음)
   - default_only    : 기본 장면만
   - vary_only       : 변형 장면만 (생성 로그 필요)
@@ -30,8 +30,9 @@ if os.path.exists(out):
 tmp = tempfile.mkdtemp(prefix="mix_", dir=os.path.dirname(out))
 parts, summary, index_rows = [], [], []
 for si, spec in enumerate(a.src):
-    f = (spec.split(":") + ["", "", "", ""])[:5]
+    f = (spec.split(":") + ["", "", "", "", ""])[:6]
     root, log, fruits, filt, cap = os.path.expanduser(f[0]), f[1], f[2] or "all", f[3], f[4]
+    excl = {int(x) for x in f[5].removeprefix("ex=").split("+") if x}  # 품질 검사로 뺄 원본 에피소드
     ds = LeRobotDataset(f"local/{os.path.basename(root)}", root=root, video_backend="pyav")
     eps = ds.meta.episodes
     fruit_of = {int(eps[i]["episode_index"]): eps[i]["tasks"][0].split()[2] for i in range(len(eps))}
@@ -54,12 +55,14 @@ for si, spec in enumerate(a.src):
             continue
         if filt == "vary_only" and (L is None or L["kind"] != "vary"):
             continue
+        if e in excl:
+            continue
         if cap and per.get(fr, 0) >= int(cap):
             continue
         per[fr] = per.get(fr, 0) + 1
         keep.append(e)
     drop = [e for e in fruit_of if e not in keep]
-    summary.append({"src": root, "filter": filt or "-", "kept": len(keep), "per_fruit": per})
+    summary.append({"src": root, "filter": filt or "-", "kept": len(keep), "per_fruit": per, "excluded": sorted(excl)})
     for e in sorted(keep):  # 합친 데이터셋의 에피소드 순서 = 소스 순서 → 원본 번호 순 (merge_datasets 가 이어 붙임)
         r = recs.get(e, {})
         index_rows.append({"src": os.path.basename(root), "src_episode": int(e), "fruit": fruit_of[e],
