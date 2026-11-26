@@ -32,7 +32,24 @@ nohup bash train.sh --data fruit_mix3_A_R1a.zip --steps 170000 --name act_mix3A_
   - chunk_size 50, image_transforms 가 색 4개만
   - 다르면 멈추고 보고한다.
 
-### 3. zip (te 설정)
+### 2-1. 자동 마무리 띄우기 (학습을 띄우고 설정을 확인한 직후)
+학습이 끝나면 아래 zip·형식 검사·업로드를 대신 하는 스크립트를 nohup 으로 띄운다. 에이전트가 학습이 끝날 때까지 깨어 있지 않아도 올라간다.
+```bash
+cd /home/work/act_mix3_c50
+huggingface-cli download mgm136044/fruit_mix3_train tools/auto_finish_upload.py --repo-type dataset --local-dir . && cp tools/auto_finish_upload.py .
+sha256sum auto_finish_upload.py   # 08fe1f748235d5faeb36b18464a5dff941ed5ffb755c999478effc7d740dd33e  (다르면 실행하지 말고 보고)
+PY=$(grep -o '학습 시작 · .*' train.log | tail -1 | sed 's/^학습 시작 · //'); "$PY" -c "import lerobot, huggingface_hub; print('ok')"
+nohup "$PY" auto_finish_upload.py --name act_mix3A_c50_R1a_170k --repo mgm136044/act_mix3 \
+  --zips 170000:plain:submission_act_mix3A_c50_R1a_170k,170000:te:submission_act_mix3A_c50_R1a_170k_te,150000:te:submission_act_mix3A_c50_R1a_150k_te \
+  --note "fruit_mix3_A_R1a ({EP2}, A + DAgger R1, 사람 시연 아님) · C50(10만)에서 이어 학습 · chunk 50" > auto_finish_act_mix3A_c50_R1a_170k.log 2>&1 &
+sleep 30; cat auto_finish_act_mix3A_c50_R1a_170k.log
+```
+- 확인할 줄: `HF 확인 … (비공개)`, `학습 프로세스 감지: [pid …]`.
+- `✘ HF 로그인 안 됨` 이면 사람에게 토큰을 요청한다. 사람이 토큰을 넣은 같은 셸에서 다시 띄운다.
+- 학습이 끝나고 몇 분 뒤 로그 마지막 줄이 `AUTO_UPLOAD_DONE` 이면 성공이다. 스크립트는 저장소에 README 가 이미 있으면 받아서 이 학습의 절만 덧붙인다.
+- **다음 zip 단계는 스크립트가 한다. 스크립트가 `✘` 로 끝났을 때만 직접 한다**(같은 파일을 두 번 올리지 않기 위해).
+
+### 3. zip (te 설정) — 스크립트가 하는 일(✘ 일 때만 직접)
 - 15만·17만: `submission_act_mix3A_c50_R1a_150k_te.zip`, `submission_act_mix3A_c50_R1a_170k_te.zip`
   - 사본 config.json 의 `"n_action_steps": 1`, `"temporal_ensemble_coeff": 0.01` 두 값만 바꾼다.
 - 17만은 config 그대로인 것도 만든다: `submission_act_mix3A_c50_R1a_170k.zip`

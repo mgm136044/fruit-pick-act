@@ -179,3 +179,4 @@
 [2026-11-26 15:04] DAgger R1a 시작: 운전 te_models/act_mix2_100k_color_te, 조건당 36(cnt23·cnt4·mix 1.5배), 최대 저장 260
 11-26 18:31 HF 업로드 시작(내가 실행, 사용자 지시): fruit_mix3_train ← fruit_mix3_A_train (비공개 저장소 먼저 만들고 확인)
 11-26 18:36 HF 업로드 완료: fruit_mix3_train (비공개 확인, zip sha256 61187afb… 일치, 5파일). hf CLI 가 끝에 click Exit(0) 트레이스백을 찍고 exit=1 을 내지만 파일은 모두 올라감
+11-26 18:48 auto_finish_upload.py 만들고 로컬 시험(te zip 이 제출본과 바이트 같음, 키트 검사 통과, 실패 경로 exit 3) → fruit_mix3_train/tools/ 에 올림

@@ -13,6 +13,7 @@
 ```
 
 - **제출 실행 설정은 temporal ensemble 이다.** zip 사본의 `config.json` 에서 `"n_action_steps": 1`, `"temporal_ensemble_coeff": 0.01` 두 값만 바꾼다. 로컬에서는 `../make_te_zip.sh <pretrained_model> <이름> [계수|nNN]` 로 만든다.
+- **학습 끝 자동 마무리**: `auto_finish_upload.py`(내가 만든 것, 키트 아님). 학습 폴더에서 학습용 python 으로 nohup 실행하면 학습이 끝나기를 기다렸다가 zip(기본·te) → 서버 방식 형식 검사 → sha256 → HF 비공개 업로드 → 서버 값 대조까지 한다. 학교 세션은 `mgm136044/fruit_mix3_train` 의 `tools/` 에서 받는다. 사용법은 파일 머리말.
 - **이어 학습**: 저장 폴더를 복사한 뒤, 새 데이터 zip 과 새 이름으로 `train.sh` 를 다시 돌린다. `train_act.py` 189~192행에서 `--resume=true` 와 새 `--dataset.root` 로 이어 간다.
 
 ## 학습 기록
