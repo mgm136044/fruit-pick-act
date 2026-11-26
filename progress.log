@@ -190,3 +190,4 @@
 [2026-11-26 19:00] R1a 다시 묶기 완료: /home/mingyeongmin/datasets/fruit_mix3_A_R1a_train (zip 4538453401 bytes, sha256 02fbb45ed396062e…, 전체 802 217422, R1a 251)
 11-26 19:00 HF 업로드 시작(나): fruit_mix3_train ← fruit_mix3_A_R1a.zip + README_R1a.md
 11-26 19:04 R1a 다시 묶기(jump 9개 뺌, 802ep·217422프레임, sha 02fbb45e…) HF 업로드 완료(README_R1a.md, A README 그대로). chain_resume.sh 시험 통과 → tools/ 업로드
+[2026-11-26 19:20] 평가 대기열 시작 · 2026-11-27 12:00 까지 · 이미 한 것 []
