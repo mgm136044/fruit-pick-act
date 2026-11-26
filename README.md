@@ -54,3 +54,14 @@ COURSE_ASSETS=$PWD/assets_c4 python dagger_collect.py --checkpoint <폴더> --da
 - 로컬 같은 장면 비교: te 24/40 대 n100 12/40. te 의 실패는 모두 잡기 실패이고, 다시 잡으러 가지 않는다 → DAgger 회복 데이터로 겨냥한다.
 - 깊게 닫는 잡기는 이 시뮬레이터에서 과일을 짜내 실패한다. 가운데 맞춤만 쓴다.
 - 사람 시연 데이터는 이 저장소와 HF 에 올리지 않는다.
+
+## 저장소에 없는 것과 있는 곳
+
+| 항목 | 있는 곳 |
+|---|---|
+| 학습 데이터셋 zip (스크립트 자동 시연) | HF 비공개: `mgm136044/fruit_scripted_mix2_train`(mix2 589ep), `mgm136044/fruit_mix3_train`(mix3 A, A+DAgger) |
+| 학습한 모델 / 제출 zip | HF 비공개: `mgm136044/act_mix2_100k_color`, `act_mix2_200k_color`, `act_mix2_c50`, `act_mix3` |
+| 로컬 원본 데이터셋·체크포인트·평가 GIF·1부 HTML 보고서(GIF 포함, 파일당 45~77MB) | 메인 PC `~/datasets`, `~/fruit_datagen/{train_runs,te_models,report_html}` (용량 때문에 제외) |
+| 데이터셋을 만든 시점의 코드 사본 | 이 저장소 `logs/*_snapshot.py`, `logs/params_mix3*.json` |
+| 팀원 사람 시연 데이터 | 올리지 않음 |
+| 수업 자료(PDF·키트 zip) | 올리지 않음 (키트는 각자 설치) |

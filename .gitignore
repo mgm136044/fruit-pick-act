@@ -11,11 +11,14 @@
 !/reports_w1/
 !/school_training/
 !/assets_c4/
+!/setup_fix/
 !/logs/
 /logs/*
 !/logs/fruit_pts_*.npy
 !/logs/*.json
 !/logs/*.jsonl
 !/logs/*.md
+!/logs/*.py
+!/logs/*.sh
 __pycache__/
 *.pyc
